@@ -12,33 +12,33 @@ public class Pessoa {
         setSobrenome(sobrenome);
     }
     
-    // Setter e getter do id
+    // Getter e setter do id
+ 
+    public int getId() {
+        return id;
+    }
     
     public final void setId(int id) {
         this.id = id;
     }
     
-    public int getId() {
-        return id;
-    }
+    // Getter e setter do nome
     
-    // Setter e getter do nome
+    public String getNome() {
+        return nome;
+    }    
     
     public final void setNome(String nome) {
         this.nome = nome;
     }
     
-    public String getNome() {
-        return nome;
-    }
-    
-    // Setter e getter do sobrenome
-    
-    public final void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
+    // Getter e setter do sobrenome
     
     public String getSobrenome() {
         return sobrenome;
+    }    
+    
+    public final void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 }

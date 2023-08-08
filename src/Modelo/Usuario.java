@@ -9,13 +9,13 @@ public class Usuario extends Pessoa {
         setRegistroAcademico(registroAcademico);
     }
     
-    // Setter e getter do registro acadêmico
-    
-    public final void setRegistroAcademico(int registroAcademico) {
-        this.registroAcademico = registroAcademico;
-    }
+    // Getter e setter do registro acadêmico
     
     public int getRegistroAcademico() {
         return registroAcademico;
+    }    
+    
+    public final void setRegistroAcademico(int registroAcademico) {
+        this.registroAcademico = registroAcademico;
     }
 }

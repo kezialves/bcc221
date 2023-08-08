@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/DAO/DAOCategoria.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Livro.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Categoria.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Funcionario.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Pessoa.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Autor.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Emprestimo.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/DAO/DAOFuncionario.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/DAO/DAOAutor.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/DAO/DAOInterface.java</file>
+            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Modelo/Usuario.java</file>
+        </group>
+    </open-files>
+</project-private>

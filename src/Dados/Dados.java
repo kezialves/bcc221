@@ -1,18 +1,84 @@
 package Dados;
 
-import Modelo.Autor;
-import Modelo.Categoria;
-import Modelo.Emprestimo;
-import Modelo.Funcionario;
-import Modelo.Livro;
-import Modelo.Usuario;
+import Modelo.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Dados {
-    List<Funcionario> listaFuncionarios;
-    List<Usuario> listaUsuarios;
-    List<Autor> listaAutores;
-    List<Livro> listaLivros;
-    List<Categoria> listaCategorias;
-    List<Emprestimo> listaEmprestimos;
+    private static List<Funcionario> listaFuncionarios;
+    private static List<Usuario> listaUsuarios;
+    private static List<Autor> listaAutores;
+    private static List<Livro> listaLivros;
+    private static List<Categoria> listaCategorias;
+    private static List<Emprestimo> listaEmprestimos;
+
+    // Construtor de dados
+    public Dados() {
+        this.listaFuncionarios = new ArrayList<>();
+        this.listaUsuarios = new ArrayList<>();
+        this.listaAutores = new ArrayList<>();
+        this.listaLivros = new ArrayList<>();
+        this.listaCategorias = new ArrayList<>();
+        this.listaEmprestimos = new ArrayList<>();
+    }
+    
+    // Getter e setter da lista de funcionários
+
+    public static List<Funcionario> getListaFuncionarios() {
+        return listaFuncionarios;
+    }
+    
+    public static void setListaFuncionarios(List<Funcionario> listaFuncionarios) {
+        Dados.listaFuncionarios = listaFuncionarios;
+    }
+
+    // Getter e setter da lista de usuários
+    
+    public static List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public static void setListaUsuarios(List<Usuario> listaUsuarios) {
+        Dados.listaUsuarios = listaUsuarios;
+    }
+    
+    // Getter e setter da lista de autores
+
+    public static List<Autor> getListaAutores() {
+        return listaAutores;
+    }
+
+    public static void setListaAutores(List<Autor> listaAutores) {
+        Dados.listaAutores = listaAutores;
+    }
+
+    // Getter e setter da lista de livros
+    
+    public static List<Livro> getListaLivros() {
+        return listaLivros;
+    }
+
+    public static void setListaLivros(List<Livro> listaLivros) {
+        Dados.listaLivros = listaLivros;
+    }
+
+    // Getter e setter da lista de categorias
+    
+    public static List<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
+    public static void setListaCategorias(List<Categoria> listaCategorias) {
+        Dados.listaCategorias = listaCategorias;
+    }
+    
+    // Getter e setter da lista de empréstimos
+
+    public static List<Emprestimo> getListaEmprestimos() {
+        return listaEmprestimos;
+    }
+
+    public static void setListaEmprestimos(List<Emprestimo> listaEmprestimos) {
+        Dados.listaEmprestimos = listaEmprestimos;
+    }
 }

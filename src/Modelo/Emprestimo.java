@@ -1,6 +1,6 @@
 package Modelo;
 
-import java.util.*;
+import java.util.Date;
 
 public class Emprestimo {
     private int id;
@@ -18,53 +18,53 @@ public class Emprestimo {
         setDataEmprestimo(dataEmprestimo);
     }
     
-    // Setter e getter do id do empréstimo
+    // Getter e setter do id do empréstimo
+
+    public int getId() {
+        return id;
+    }    
     
     public final void setId(int id) {
         this.id = id;
     }
     
-    public int getId() {
-        return id;
-    }
-    
-    // Setter e getter do id do funcionário
-    
-    public final void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
+    // Getter e setter do id do funcionário
     
     public int getIdFuncionario() {
         return idFuncionario;
     }
     
-    // Setter e getter do id do usuário
+    public final void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+    
+    // Getter e setter do id do usuário
+ 
+    public int getIdUsuario() {
+        return idUsuario;
+    }    
     
     public final void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
     
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    // Getter e setter do id do livro
     
-    // Setter e getter do id do livro
+    public int getILivro() {
+        return idLivro;
+    }    
     
     public final void setIdLivro(int idLivro) {
         this.idLivro = idLivro;
     }
     
-    public int getILivro() {
-        return idLivro;
-    }
-    
-    // Setter e getter da data do empréstimo
-    
-    public final void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
-    }
+    // Getter e setter da data do empréstimo
     
     public Date getDataEmprestimo() {
         return dataEmprestimo;
+    }
+    
+    public final void setDataEmprestimo(Date dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
     }
 }

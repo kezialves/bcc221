@@ -9,13 +9,13 @@ public class Autor extends Pessoa {
         setBiografia(biografia);
     }
     
-    // Setter e getter da biografia
-    
-    public final void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
+    // Getter e setter da biografia
     
     public String getBiografia() {
         return biografia;
+    }
+    
+    public final void setBiografia(String biografia) {
+        this.biografia = biografia;
     }
 }

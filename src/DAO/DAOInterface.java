@@ -4,23 +4,22 @@ package DAO;
 // As classes DAO manipulam os objetos instanciados a partir das classes Modelo
 // Elas são responsáveis por criar, manipular e deletar os objetos armazenados nas listas de dados
 
-import Modelo.Funcionario;
-// import java.util.ArrayList;
+import java.util.List;
 
 public interface DAOInterface {
     
-    // Adiciona um funcionário à lista de funcionários
-    public void incluir(Funcionario novoFuncionario);
+    // Adiciona um objeto à lista
+    public void incluir(Object objeto);
     
-    // Localiza um funcionário na lista de funcionários
-    public Funcionario localizar(int id);
+    // Localiza um objeto na lista
+    public int localizar(int id);
     
-    // Atualiza as informações de um funcionário
-    public void atualizar(Funcionario funcionario);
+    // Atualiza as informações de um objeto
+    public void atualizar(Object antigo, Object novo);
     
-    // Remove um funcionário da lista de funcionários
-    public void remover(Funcionario funcionario);
+    // Remove um objeto da lista
+    public void remover(Object objeto);
     
-    // Pega a lista de funcionários
-    // public ArrayList<Funcionario> getLista();
+    // Pega a lista
+    public List<Object> getLista();
 }

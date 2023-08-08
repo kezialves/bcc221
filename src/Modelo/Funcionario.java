@@ -9,13 +9,13 @@ public class Funcionario extends Pessoa {
         setMatricula(matricula);
     }
     
-    // Setter e getter da matrícula
-    
-    public final void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
+    // Getter e setter da matrícula
     
     public int getMatricula() {
         return matricula;
+    }    
+    
+    public final void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 }

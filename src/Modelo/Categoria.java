@@ -10,23 +10,23 @@ public class Categoria {
         this.titulo = titulo;
     }
     
-    // Setter e getter do id
-    
-    public void setId(int id) {
-        this.id = id;
-    }
+    // Getter e setter do id
     
     public int getId() {
         return id;
     }
     
-    // Setter e getter do título
-    
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setId(int id) {
+        this.id = id;
     }
+    
+    // Getter e setter do título
     
     public String getTitulo() {
         return titulo;
+    }
+    
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }
