@@ -44,7 +44,7 @@ public class DAOLivro implements DAOInterface{
     }
 
     @Override
-    public void atualizar(Object antigo, Object novo) {
+    public void atualizar(Object objeto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
     }

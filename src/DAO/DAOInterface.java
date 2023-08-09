@@ -15,7 +15,7 @@ public interface DAOInterface {
     public Object localizar(int id);
     
     // Atualiza as informações de um objeto
-    public void atualizar(Object antigo, Object novo);
+    public void atualizar(Object objeto);
     
     // Remove um objeto da lista
     public void remover(Object objeto);

@@ -48,7 +48,7 @@ public class DAOFuncionario implements DAOInterface {
     }
 
     @Override
-    public void atualizar(Object antigo, Object novo) {
+    public void atualizar(Object objeto) {
         //PENSAR
     }
     
