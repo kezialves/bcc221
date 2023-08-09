@@ -18,4 +18,29 @@ public class Usuario extends Pessoa {
     public final void setRegistroAcademico(int registroAcademico) {
         this.registroAcademico = registroAcademico;
     }
+
+    @Override
+    public boolean equals(Object objeto){
+
+        if(this == objeto)
+            return true;
+
+        if(objeto == null)
+            return false;
+
+        if(getClass() != objeto.getClass())
+            return false;
+
+        final Usuario usuario = (Usuario) objeto;
+
+        if(this.getId() != usuario.getId())
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + " - RA: " + getRegistroAcademico();
+    }
 }

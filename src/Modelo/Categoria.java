@@ -29,4 +29,29 @@ public class Categoria {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    @Override
+    public boolean equals(Object objeto){
+
+        if(this == objeto)
+            return true;
+
+        if(objeto == null)
+            return false;
+
+        if(getClass() != objeto.getClass())
+            return false;
+
+        final Categoria categoria = (Categoria) objeto;
+
+        if(this.getId() != categoria.getId())
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public String toString(){
+        return getId() + "\n Título: " + getTitulo();
+    }
 }

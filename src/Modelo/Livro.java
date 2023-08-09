@@ -2,6 +2,7 @@ package Modelo;
 
 import java.util.List;
 import java.util.ArrayList;
+import Dados.Dados;
 
 public class Livro {
     private int id;
@@ -15,7 +16,6 @@ public class Livro {
         this.titulo = titulo;
         this.listaCategorias = new ArrayList<>();
         this.listaAutores = new ArrayList<>();
-
     }
     
     // Getter e setter do id
@@ -56,5 +56,40 @@ public class Livro {
 
     public void setAutor(List<Autor> listaAutores) {
         this.listaAutores = listaAutores;
+    }
+
+    @Override
+    public boolean equals(Object objeto){
+
+        if(this == objeto)
+            return true;
+
+        if(objeto == null)
+            return false;
+
+        if(getClass() != objeto.getClass())
+            return false;
+
+        final Livro livro = (Livro) objeto;
+
+        if(this.getId() != livro.getId())
+            return false;
+            
+        return true;
+    }
+
+    public String toString(){
+        
+        String stringAutores = "";
+        String stringCategorias = "";
+        
+        for(Livro livro: Dados.listaLivros){
+            stringAutores = stringAutores + livro.getAutor() + " ";
+            stringCategorias = stringCategorias + livro.getCategoria() + " ";
+        }
+        
+        return getId() + " - " + getTitulo() + ":\n\t" + 
+                "Autores: " + stringAutores +
+                "Categorias: " + stringCategorias + "\n";
     }
 }

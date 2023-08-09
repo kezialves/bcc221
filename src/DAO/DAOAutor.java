@@ -7,7 +7,6 @@ import java.util.List;
 import Dados.Dados;
 import java.util.NoSuchElementException;
 
-
 public class DAOAutor implements DAOInterface {
     
     @Override
@@ -49,14 +48,26 @@ public class DAOAutor implements DAOInterface {
     public void atualizar(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException();
     
         if(!(objeto instanceof Autor))
             throw new IllegalArgumentException();
 
-        Autor autorAtulizado = (Autor) objeto;
-        Autor autor = (Autor) localizar(autorAtulizado.getId());
-        autor = autorAtulizado;
+        if(!Dados.listaAutores.isEmpty()){
+
+            for(Autor autor: Dados.listaAutores) {
+            
+                // Compara os ids da lista de autores com o passado por parâmetro
+                if(autor.equals(objeto)) {
+                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                }
+            }
+        }
+
+        Autor autorAtualizado = (Autor) objeto;
+        Autor autor = (Autor) localizar(autorAtualizado.getId());
+
+        Dados.listaAutores.set( Dados.listaAutores.indexOf(autor), autorAtualizado);
     }
 
     @Override
@@ -71,11 +82,9 @@ public class DAOAutor implements DAOInterface {
         Autor autor = (Autor) objeto;
 
         // Usa a função localizar pra saber se o autor está presente na lista
-
         // Remove se achar
         Dados.listaAutores.remove(localizar(autor.getId()));
         System.out.println("Autor removido com sucesso!");
-
     }
 
     @Override

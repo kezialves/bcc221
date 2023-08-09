@@ -41,4 +41,28 @@ public class Pessoa {
     public final void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
+
+    @Override
+    public boolean equals(Object objeto){
+
+        if(this == objeto)
+            return true;
+
+        if(objeto == null)
+            return false;
+
+        if(getClass() != objeto.getClass())
+            return false;
+
+        final Pessoa pessoa = (Pessoa) objeto;
+
+        if(this.getId() != pessoa.getId())
+            return false;
+            
+        return true;
+    }
+
+    public String toString(){
+        return getId() + " Nome: " + getNome() + "- Sobrenome: " + getSobrenome();
+    }
 }

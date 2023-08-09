@@ -24,13 +24,23 @@ public class Funcionario extends Pessoa {
 
         if(this == objeto)
             return true;
+
         if(objeto == null)
             return false;
+
         if(getClass() != objeto.getClass())
             return false;
+
         final Funcionario funcionario = (Funcionario) objeto;
+        
         if(this.getId() != funcionario.getId())
             return false;
+            
         return true;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n MAT.: " + getMatricula();
     }
 }

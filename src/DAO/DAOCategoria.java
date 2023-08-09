@@ -11,6 +11,7 @@ public class DAOCategoria implements DAOInterface {
 
     @Override
     public void incluir(Object objeto) {
+
         if(objeto == null)
             throw new IllegalArgumentException() ;
     
@@ -27,7 +28,6 @@ public class DAOCategoria implements DAOInterface {
 
         Categoria novaCategoria = (Categoria) objeto;
         Dados.listaCategorias.add(novaCategoria);
-
     }
 
     @Override
@@ -42,13 +42,33 @@ public class DAOCategoria implements DAOInterface {
         }
 
         throw new NoSuchElementException();
-
     }
 
     @Override
     public void atualizar(Object objeto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+        
+        if(objeto == null)
+            throw new IllegalArgumentException();
+    
+        if(!(objeto instanceof Categoria))
+            throw new IllegalArgumentException();
+
+        if(!Dados.listaFuncionarios.isEmpty()){
+
+            for(Categoria categoria: Dados.listaCategorias) {
+            
+                // Compara os ids da lista de autores com o passado por parâmetro
+                if(categoria.equals(objeto)) {
+                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                }
+            }
+        }
+
+        Categoria categoriaAtualizado = (Categoria) objeto;
+        Categoria categoria = (Categoria) localizar(categoriaAtualizado.getId());
+        
+        Dados.listaCategorias.set(Dados.listaCategorias.indexOf(categoria), categoriaAtualizado);
+
     }
 
     @Override
@@ -73,5 +93,4 @@ public class DAOCategoria implements DAOInterface {
         listaObjeto.addAll(Dados.listaCategorias);
         return listaObjeto;
     }    
-
 }

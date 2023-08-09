@@ -5,20 +5,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Dados {
-    public static List<Funcionario> listaFuncionarios;
-    public static List<Usuario> listaUsuarios;
-    public static List<Autor> listaAutores;
-    public static List<Livro> listaLivros;
-    public static List<Categoria> listaCategorias;
-    public static List<Emprestimo> listaEmprestimos;
+    public static List<Funcionario> listaFuncionarios = new ArrayList<>();
+    public static List<Usuario> listaUsuarios = new ArrayList<>();
+    public static List<Autor> listaAutores = new ArrayList<>();
+    public static List<Livro> listaLivros = new ArrayList<>();
+    public static List<Categoria> listaCategorias = new ArrayList<>();
+    public static List<Emprestimo> listaEmprestimos = new ArrayList<>();
 
     // Construtor de dados
     public Dados() {
-        listaFuncionarios = new ArrayList<>();
-        listaUsuarios = new ArrayList<>();
-        listaAutores = new ArrayList<>();
-        listaLivros = new ArrayList<>();
-        listaCategorias = new ArrayList<>();
-        listaEmprestimos = new ArrayList<>();
     }
 }

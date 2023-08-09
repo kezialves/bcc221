@@ -8,31 +8,32 @@ import java.util.NoSuchElementException;
 
 public class DAOFuncionario implements DAOInterface {
     
-    static ArrayList<Funcionario> funcionarios = new ArrayList<>();
-    
     @Override
     public void incluir(Object objeto) {
+
         if(objeto == null)
             throw new IllegalArgumentException() ;
     
         if(!(objeto instanceof Funcionario))
             throw new IllegalArgumentException();
 
-        for(Funcionario funcionario: Dados.listaFuncionarios) {
+        if(!Dados.listaFuncionarios.isEmpty()){
+
+            for(Funcionario funcionario: Dados.listaFuncionarios) {
             
-            // Compara os ids da lista de autores com o passado por parâmetro
-            if(funcionario.equals(objeto)) {
-                throw new IllegalArgumentException(); // retorna o index do id se achar
+                // Compara os ids da lista de autores com o passado por parâmetro
+                if(funcionario.equals(objeto)) {
+                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                }
             }
         }
 
         Funcionario novoFuncionario = (Funcionario) objeto;
-        funcionarios.add(novoFuncionario);
+        Dados.listaFuncionarios.add(novoFuncionario);
     }
     
     @Override
     public Object localizar(int id) {
-        
         
         // Percorre o vetor de funcionários procurando o id
         for(Funcionario funcionario: Dados.listaFuncionarios) {
@@ -44,12 +45,21 @@ public class DAOFuncionario implements DAOInterface {
         }
 
         throw new NoSuchElementException();
-        
     }
 
     @Override
     public void atualizar(Object objeto) {
-        //PENSAR
+
+        if(objeto == null)
+            throw new IllegalArgumentException();
+    
+        if(!(objeto instanceof Funcionario))
+            throw new IllegalArgumentException();
+
+        Funcionario funcionarioAtualizado = (Funcionario) objeto;
+        Funcionario funcionario = (Funcionario) localizar(funcionarioAtualizado.getId());
+        
+        Dados.listaFuncionarios.set( Dados.listaFuncionarios.indexOf(funcionario), funcionarioAtualizado);
     }
     
     @Override
@@ -66,7 +76,6 @@ public class DAOFuncionario implements DAOInterface {
         // Usa a função localizar pra saber se o autor está presente na lista
         // Remove se achar
         Dados.listaFuncionarios.remove(localizar(funcionario.getId()));
-        
     }
     
     @Override

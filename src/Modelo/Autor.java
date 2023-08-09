@@ -24,13 +24,24 @@ public class Autor extends Pessoa {
 
         if(this == objeto)
             return true;
+
         if(objeto == null)
             return false;
+
         if(getClass() != objeto.getClass())
             return false;
+
         final Autor autor = (Autor) objeto;
+
         if(this.getId() != autor.getId())
             return false;
+            
         return true;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n Biografia: " + getBiografia();
+    }
+
 }

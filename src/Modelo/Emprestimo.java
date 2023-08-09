@@ -67,4 +67,29 @@ public class Emprestimo {
     public final void setDataEmprestimo(Date dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
+
+    @Override
+    public boolean equals(Object objeto){
+
+        if(this == objeto)
+            return true;
+
+        if(objeto == null)
+            return false;
+
+        if(getClass() != objeto.getClass())
+            return false;
+
+        final Emprestimo emprestimo = (Emprestimo) objeto;
+        
+        if(this.getId() != emprestimo.getId())
+            return false;
+            
+        return true;
+    }
+
+    @Override
+    public String toString(){
+        return getId() + "\n Func.:" + getIdFuncionario() + "\n Usuario.: " + getIdUsuario() + "\n Livro.: " + getILivro() + "\n Data.: " + getDataEmprestimo();
+    }
 }
