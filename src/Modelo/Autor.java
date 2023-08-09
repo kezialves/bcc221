@@ -18,6 +18,7 @@ public class Autor extends Pessoa {
     public final void setBiografia(String biografia) {
         this.biografia = biografia;
     }
+<<<<<<< HEAD
 
     @Override
     public boolean equals(Object objeto){
@@ -33,4 +34,6 @@ public class Autor extends Pessoa {
             return false;
         return true;
     }
+=======
+>>>>>>> 05cece1ad04bf40fcfc51be6d4321e0b85f199e6
 }

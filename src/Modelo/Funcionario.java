@@ -18,6 +18,7 @@ public class Funcionario extends Pessoa {
     public final void setMatricula(int matricula) {
         this.matricula = matricula;
     }
+<<<<<<< HEAD
 
     @Override
     public boolean equals(Object objeto){
@@ -33,4 +34,6 @@ public class Funcionario extends Pessoa {
             return false;
         return true;
     }
+=======
+>>>>>>> 05cece1ad04bf40fcfc51be6d4321e0b85f199e6
 }
