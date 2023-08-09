@@ -47,7 +47,16 @@ public class DAOAutor implements DAOInterface {
 
     @Override
     public void atualizar(Object objeto) {
-        //PENSAR
+
+        if(objeto == null)
+            throw new IllegalArgumentException() ;
+    
+        if(!(objeto instanceof Autor))
+            throw new IllegalArgumentException();
+
+        Autor autorAtulizado = (Autor) objeto;
+        Autor autor = (Autor) localizar(autorAtulizado.getId());
+        autor = autorAtulizado;
     }
 
     @Override
