@@ -14,7 +14,7 @@ public class Main {
         Funcionario kézia = new Funcionario(2, "Kézia", "Alves", 2214026);
         Funcionario bruno = new Funcionario(3, "Bruno", "Alves", 2214029);
         Funcionario jesca = new Funcionario(4, "Jesca", "Macha", 2214099);
-        Funcionario brazz = new Funcionario(5, "Felipe", "Brazz", 2214030);
+        Funcionario brazz = new Funcionario(5, "Felip", "Brazz", 2214030);
 
         DAOFuncionario daoFuncionario = new DAOFuncionario();
         daoFuncionario.incluir(vitor);
@@ -22,7 +22,7 @@ public class Main {
         daoFuncionario.incluir(bruno);
         daoFuncionario.incluir(jesca);
 
-        daoFuncionario.remover(kézia);  
+        daoFuncionario.remover(kézia);
 
         for(Object objeto: daoFuncionario.getLista()){
             Funcionario funcionario = (Funcionario) objeto;

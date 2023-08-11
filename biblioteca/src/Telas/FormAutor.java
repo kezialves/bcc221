@@ -1,5 +1,8 @@
 package Telas;
 
+import java.util.NoSuchElementException;
+
+import javax.swing.JOptionPane;
 import DAO.DAOAutor;
 import Dados.Dados;
 import Modelo.Autor;
@@ -168,18 +171,94 @@ public class FormAutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String biografiaString = txtBiografia.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Remove o autor
+
+        Autor autor = new Autor(id, nomeString, sobrenomeString, biografiaString);
+        
+        try {
+            daoAutor.remover(autor);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtBiografia.setText("");
+        
+        JOptionPane.showMessageDialog(null, "Autor removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
-        //String id = txtID.getText();
-        //String nome = txtNome.getText();
-        //String sobrenome = txtSobrenome.getText();
-        //String biografia = txtBiografia.getText();
+       
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String biografiaString = txtBiografia.getText();
         
-        //Autor autor = new Autor(WIDTH, nome, sobrenome, biografia);
-        //this.daoAutor.incluir(autor);
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do autor não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Adiciona o autor
+
+        Autor autor = new Autor(id, nomeString, sobrenomeString, biografiaString);
+        
+        try {
+            daoAutor.incluir(autor);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir o autor! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtBiografia.setText("");
+
+        JOptionPane.showMessageDialog(null, "Autor incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -187,7 +266,40 @@ public class FormAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        // TODO add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String biografiaString = txtBiografia.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        // Localiza o autor
+        Autor autor;
+        
+        try {
+            autor = (Autor) daoAutor.localizar(id);
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtBiografia.setText("");
+        
+        JOptionPane.showMessageDialog(null, "ID: " + autor.getId() + "\nNome: " + autor.getNome() + " " + autor.getSobrenome() + "\nBio: " + autor.getBiografia(), "Autor encontrado!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     /**
@@ -219,7 +331,8 @@ public class FormAutor extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            
+            public void run() {    
                 new FormAutor().setVisible(true);
             }
         });
@@ -245,3 +358,4 @@ public class FormAutor extends javax.swing.JFrame {
     private javax.swing.JTextField txtSobrenome;
     // End of variables declaration//GEN-END:variables
 }
+

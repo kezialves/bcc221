@@ -13,16 +13,16 @@ public class DAOAutor implements DAOInterface {
     public void incluir(Object objeto){
         
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Autor nulo!") ;
     
         if(!(objeto instanceof Autor))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é autor!");
 
         //verificar se o autor já existe pra não ter duplicata
         
         for(Autor autor: Dados.listaAutores){
             if(autor.equals(objeto))
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Erro! O autor já está presente na lista!");
         }
 
         Autor autor = (Autor) objeto;
@@ -41,7 +41,7 @@ public class DAOAutor implements DAOInterface {
             }
         }
         
-        throw new NoSuchElementException(); // se não achar
+        throw new NoSuchElementException("ID não encontrado!"); // se não achar
     }
 
     @Override
@@ -74,10 +74,10 @@ public class DAOAutor implements DAOInterface {
     public void remover(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Autor nulo!") ;
     
         if(!(objeto instanceof Autor))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é autor!");
 
         Autor autor = (Autor) objeto;
 
