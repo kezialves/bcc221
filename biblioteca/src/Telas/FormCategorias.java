@@ -3,6 +3,10 @@ package Telas;
 import DAO.DAOCategoria;
 import Modelo.Categoria;
 
+import java.util.NoSuchElementException;
+
+import javax.swing.*;
+
 public class FormCategorias extends javax.swing.JFrame {
 
     /**
@@ -11,6 +15,8 @@ public class FormCategorias extends javax.swing.JFrame {
     public FormCategorias() {
         initComponents();
     }
+
+    DAOCategoria daoCategoria = new DAOCategoria();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +51,12 @@ public class FormCategorias extends javax.swing.JFrame {
 
         jLabel2.setText("Título:");
 
+        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTituloActionPerformed(evt);
+            }
+        });
+
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAdicionar.setText("Adicionar");
@@ -64,6 +76,11 @@ public class FormCategorias extends javax.swing.JFrame {
         jPanel3.add(btnRemover);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnAtualizar);
 
         btnLocalizar.setText("Localizar");
@@ -144,20 +161,215 @@ public class FormCategorias extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        // TODO add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtTitulo.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        // Localiza o autor
+        Categoria categoria;
+        
+        try {
+            categoria = (Categoria) daoCategoria.localizar(id);
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        txtID.setText("");
+        txtTitulo.setText("");
+        
+        JOptionPane.showMessageDialog(null, "ID: " + categoria.getId() + "\nTítulo: " + categoria.getTitulo(), nomeString, JOptionPane.PLAIN_MESSAGE);
+
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
+
+
+
+
+
+
+
+
+
+
+
+
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String tituloString = txtTitulo.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Remove o autor
+
+        Categoria categoria = new Categoria(id, tituloString);
+        
+        try {
+            daoCategoria.remover(categoria);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtTitulo.setText("");
+        
+        JOptionPane.showMessageDialog(null, "Categoria removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String tituloString = txtTitulo.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(tituloString.isEmpty()) {
+                throw new IllegalArgumentException("Título inválido! O título da categoria não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Adiciona o autor
+
+        Categoria categoria = new Categoria(id, tituloString);
+        
+        try {
+            daoCategoria.incluir(categoria);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir a categoria! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtTitulo.setText("");
+
+        JOptionPane.showMessageDialog(null, "Categoria incluída!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+    
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TOD add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        String idString = txtID.getText();
+        String tituloString = txtTitulo.getText();
+        
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        Categoria categoria = new Categoria(id, tituloString);
+
+        try{
+            daoCategoria.atualizar(categoria);
+        }
+        catch (IllegalArgumentException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloActionPerformed
 
     /**
      * @param args the command line arguments

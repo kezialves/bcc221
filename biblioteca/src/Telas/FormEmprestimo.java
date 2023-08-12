@@ -1,7 +1,13 @@
 package Telas;
 
+import javax.swing.JOptionPane;
+import java.awt.Toolkit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.awt.Dimension;
 import DAO.DAOEmprestimo;
 import Modelo.Emprestimo;
+import java.util.Date;
 
 public class FormEmprestimo extends javax.swing.JFrame {
 
@@ -11,6 +17,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
     public FormEmprestimo() {
         initComponents();
     }
+
+    DAOEmprestimo daoEmprestimo = new DAOEmprestimo();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,11 +196,112 @@ public class FormEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
+
+        String idString = txtID.getText();
+        String idFuncionarioString = txtIDFuncionario.getText();
+        String idUsuarioString = txtIDUsuario.getText();
+        String idLivroString = txtIDLivro.getText();
+        String dataEmprestimoString = txtData.getText();
+        
+        int id = 0,
+            idFuncionario = 0,
+            idUsuario = 0,
+            idLivro = 0;
+            
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+            idFuncionario = Integer.parseInt(idFuncionarioString);
+            idUsuario = Integer.parseInt(idUsuarioString);
+            idLivro = Integer.parseInt(idLivroString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        Date data;
+        
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        
+        //Garante que minha data será válida.
+        formatDate.setLenient(false);
+
+        try {
+            data = formatDate.parse(dataEmprestimoString);
+        }
+        catch (ParseException exception) {
+            JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Adiciona um empréstimo
+        Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
+        
+        try {
+            daoEmprestimo.incluir(emprestimo);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtData.setText("");
+        txtIDFuncionario.setText("");
+        txtIDLivro.setText("");
+        txtIDUsuario.setText("");
+
+        JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String idFuncionarioString = txtIDFuncionario.getText();
+        String idUsuarioString = txtIDUsuario.getText();
+        String idLivroString = txtIDLivro.getText();
+        String dataEmprestimoString = txtData.getText();
+        
+        int id = 0,
+            idFuncionario = 0,
+            idUsuario = 0,
+            idLivro = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+            idFuncionario = Integer.parseInt(idFuncionarioString);
+            idUsuario = Integer.parseInt(idUsuarioString);
+            idLivro = Integer.parseInt(idLivroString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Remove o empréstimo
+
+        // Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, );
+        
+        // try {
+        //     daoAutor.remover(autor);
+        // }
+        // catch(IllegalArgumentException exception) {
+        //     JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+        //     return;
+        // }
+        // catch(NoSuchElementException exception) {
+        //     JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+        //     return;
+        // }
+
+        // txtID.setText("");
+        // txtNome.setText("");
+        // txtSobrenome.setText("");
+        // txtBiografia.setText("");
+        
+        // JOptionPane.showMessageDialog(null, "Autor removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -200,7 +309,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**

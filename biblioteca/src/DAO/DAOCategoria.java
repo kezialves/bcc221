@@ -13,16 +13,16 @@ public class DAOCategoria implements DAOInterface {
     public void incluir(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Categoria nula!");
     
         if(!(objeto instanceof Categoria))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é uma categoria!");
 
         for(Categoria categoria: Dados.listaCategorias) {
             
-            // Compara os ids da lista de autores com o passado por parâmetro
+            // Compara os ids da lista de categorias com o passado por parâmetro
             if(categoria.equals(objeto)) {
-                throw new IllegalArgumentException(); // retorna o index do id se achar
+                throw new IllegalArgumentException("Erro! A categoria já está presente na lista!"); 
             }
         }
 
@@ -35,31 +35,31 @@ public class DAOCategoria implements DAOInterface {
 
        for(Categoria categoria: Dados.listaCategorias) {
             
-            // Compara os ids da lista de funcionários com o passado por parâmetro
+            // Compara os ids da lista de categorias com o passado por parâmetro
             if(categoria.getId() == id) {
                 return categoria; // retorna o index do id se achar
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("ID não encontrado!");
     }
 
     @Override
     public void atualizar(Object objeto) {
         
         if(objeto == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Categoria nula!");
     
         if(!(objeto instanceof Categoria))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é uma categoria!");
 
         if(!Dados.listaFuncionarios.isEmpty()){
 
             for(Categoria categoria: Dados.listaCategorias) {
             
-                // Compara os ids da lista de autores com o passado por parâmetro
+                // Compara os ids da lista de categorias com o passado por parâmetro
                 if(categoria.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                    throw new IllegalArgumentException("Erro! A categoria já está presente na lista!"); // retorna o index do id se achar
                 }
             }
         }
@@ -75,14 +75,14 @@ public class DAOCategoria implements DAOInterface {
     public void remover(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Categoria nula!") ;
     
         if(!(objeto instanceof Categoria))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é uma categoria!");
 
         Categoria categoria = (Categoria) objeto;
         
-        // Usa a função localizar pra saber se o autor está presente na lista
+        // Usa a função localizar pra saber se a categoria está presente na lista
         // Remove se achar
         Dados.listaCategorias.remove(localizar(categoria.getId()));
     }

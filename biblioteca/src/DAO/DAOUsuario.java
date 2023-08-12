@@ -13,31 +13,30 @@ public class DAOUsuario implements DAOInterface {
     public void incluir(Object objeto) {
 
        if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Usuário nulo!") ;
     
         if(!(objeto instanceof Usuario))
-            throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um usuário!");
+
 
         if(!Dados.listaUsuarios.isEmpty()){
 
             for(Usuario usuario: Dados.listaUsuarios) {
             
-                // Compara os ids da lista de autores com o passado por parâmetro
+                // Compara os ids da lista de usuários com o passado por parâmetro
                 if(usuario.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                    throw new IllegalArgumentException("Erro! O usuário já está presente na lista!"); // retorna o index do id se achar
                 }
             }
         }
 
         for(Usuario usuario: Dados.listaUsuarios) {
             
-            // Compara os ids da lista de autores com o passado por parâmetro
+            // Compara os ids da lista de usuários com o passado por parâmetro
             if(usuario.equals(objeto)) {
                 throw new IllegalArgumentException(); // retorna o index do id se achar
             }
         }
-
-        
 
         Usuario novoUsuario = (Usuario) objeto;
         Dados.listaUsuarios.add(novoUsuario);
@@ -48,7 +47,7 @@ public class DAOUsuario implements DAOInterface {
 
         for(Usuario usuario: Dados.listaUsuarios) {
             
-            // Compara os ids da lista de funcionários com o passado por parâmetro
+            // Compara os ids da lista de usuários com o passado por parâmetro
             if(usuario.getId() == id) {
                 return usuario; // retorna o index do id se achar
             }
@@ -84,7 +83,7 @@ public class DAOUsuario implements DAOInterface {
 
         Usuario usuario = (Usuario) objeto;
         
-        // Usa a função localizar pra saber se o autor está presente na lista
+        // Usa a função localizar pra saber se o usuário está presente na lista
         // Remove se achar
         Dados.listaUsuarios.remove(localizar(usuario.getId()));
     }

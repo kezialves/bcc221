@@ -14,25 +14,25 @@ public class DAOLivro implements DAOInterface{
     public void incluir(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Livro nulo!") ;
     
         if(!(objeto instanceof Categoria))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um livro!");
 
         if(!Dados.listaLivros.isEmpty()){
 
             for(Livro livro: Dados.listaLivros) {
             
-                // Compara os ids da lista de autores com o passado por parâmetro
+                // Compara os ids da lista de livros com o passado por parâmetro
                 if(livro.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                    throw new IllegalArgumentException("Erro! O livro já está presente na lista!"); // retorna o index do id se achar
                 }
             }
         }
 
         for(Livro livro: Dados.listaLivros) {
             
-            // Compara os ids da lista de autores com o passado por parâmetro
+            // Compara os ids da lista de livros com o passado por parâmetro
             if(livro.equals(objeto)) {
                 throw new IllegalArgumentException(); // retorna o index do id se achar
             }
@@ -80,7 +80,7 @@ public class DAOLivro implements DAOInterface{
 
         Livro livro = (Livro) objeto;
         
-        // Usa a função localizar pra saber se o autor está presente na lista
+        // Usa a função localizar pra saber se o livro está presente na lista
         // Remove se achar
         Dados.listaLivros.remove(localizar(livro.getId()));
     }

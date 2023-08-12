@@ -2,6 +2,8 @@ package Telas;
 
 import java.util.NoSuchElementException;
 
+import java.awt.Toolkit;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import DAO.DAOAutor;
 import Dados.Dados;
@@ -15,7 +17,8 @@ public class FormAutor extends javax.swing.JFrame {
     public FormAutor() {
         initComponents();
     }
-    
+
+
     DAOAutor daoAutor = new DAOAutor();
 
     /**
@@ -45,6 +48,8 @@ public class FormAutor extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        jMenu1.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,6 +91,11 @@ public class FormAutor extends javax.swing.JFrame {
         jPanel2.add(btnRemover);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAtualizar);
 
         btnLocalizar.setText("Localizar");
@@ -301,6 +311,39 @@ public class FormAutor extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "ID: " + autor.getId() + "\nNome: " + autor.getNome() + " " + autor.getSobrenome() + "\nBio: " + autor.getBiografia(), "Autor encontrado!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnLocalizarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String biografiaString = txtBiografia.getText();
+        
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        Autor autor = new Autor(id, nomeString, sobrenomeString, biografiaString);
+
+        try{
+            daoAutor.atualizar(autor);
+
+        }
+        catch (IllegalArgumentException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments

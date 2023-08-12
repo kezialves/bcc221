@@ -13,16 +13,16 @@ public class DAOEmprestimo implements DAOInterface {
 	public void incluir(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Empréstimo nulo!") ;
     
         if(!(objeto instanceof Emprestimo))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um empréstimo!");
 
         for(Emprestimo emprestimo: Dados.listaEmprestimos) {
             
-            // Compara os ids da lista de autores com o passado por parâmetro
+            // Compara os ids da lista de empréstimos com o passado por parâmetro
             if(emprestimo.equals(objeto)) {
-                throw new IllegalArgumentException(); // retorna o index do id se achar
+                throw new IllegalArgumentException("Erro! O empréstimo já está presente na lista!"); // retorna o index do id se achar
             }
         }
 
@@ -35,7 +35,7 @@ public class DAOEmprestimo implements DAOInterface {
 
        for(Emprestimo emprestimo: Dados.listaEmprestimos) {
             
-            // Compara os ids da lista de funcionários com o passado por parâmetro
+            // Compara os ids da lista de empréstimos com o passado por parâmetro
             if(emprestimo.getId() == id) {
                 return emprestimo; // retorna o index do id se achar
             }
@@ -72,7 +72,7 @@ public class DAOEmprestimo implements DAOInterface {
 
             for(Emprestimo emprestimo: Dados.listaEmprestimos) {
             
-                // Compara os ids da lista de autores com o passado por parâmetro
+                // Compara os ids da lista de emprestimos com o passado por parâmetro
                 if(emprestimo.equals(objeto)) {
                     throw new IllegalArgumentException(); // retorna o index do id se achar
                 }
@@ -81,7 +81,7 @@ public class DAOEmprestimo implements DAOInterface {
 
         Emprestimo emprestimo = (Emprestimo) objeto;
         
-        // Usa a função localizar pra saber se o autor está presente na lista
+        // Usa a função localizar pra saber se o emprestimo está presente na lista
         // Remove se achar
         Dados.listaEmprestimos.remove(localizar(emprestimo.getId()));
     }

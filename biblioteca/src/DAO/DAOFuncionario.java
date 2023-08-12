@@ -12,18 +12,18 @@ public class DAOFuncionario implements DAOInterface {
     public void incluir(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Funcionário nulo!") ;
     
         if(!(objeto instanceof Funcionario))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um funcionário!");
 
         if(!Dados.listaFuncionarios.isEmpty()){
 
             for(Funcionario funcionario: Dados.listaFuncionarios) {
             
-                // Compara os ids da lista de autores com o passado por parâmetro
+                // Compara os ids da lista de funcionario com o passado por parâmetro
                 if(funcionario.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
+                    throw new IllegalArgumentException("Erro! O funcionário já está presente na lista!"); // retorna o index do id se achar
                 }
             }
         }
@@ -73,7 +73,7 @@ public class DAOFuncionario implements DAOInterface {
 
         Funcionario funcionario = (Funcionario) objeto;
         
-        // Usa a função localizar pra saber se o autor está presente na lista
+        // Usa a função localizar pra saber se o funcionário está presente na lista
         // Remove se achar
         Dados.listaFuncionarios.remove(localizar(funcionario.getId()));
     }
