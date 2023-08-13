@@ -45,7 +45,7 @@ public class FormGerenciaAdm extends javax.swing.JFrame {
         });
         menuGerenciar.add(menuGerenciarAutor);
 
-        menuGerenciarCategorias.setText("Categorias");
+        menuGerenciarCategorias.setText("Categoria");
         menuGerenciarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGerenciarCategoriasActionPerformed(evt);

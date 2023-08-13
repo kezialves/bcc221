@@ -345,8 +345,7 @@ public class FormUsuario extends javax.swing.JFrame {
         txtSobrenome.setText("");
         txtRegistroAcademico.setText("");
         
-        JOptionPane.showMessageDialog(null, "ID: " + usuario.getId() + "\nNome: " + usuario.getNome() + " " + usuario.getSobrenome() + "\nR.A.: " + usuario.getRegistroAcademico(), "usuario encontrado!", JOptionPane.PLAIN_MESSAGE);
-    
+        JOptionPane.showMessageDialog(null, "ID: " + usuario.getId() + "\nNome: " + usuario.getNome() + " " + usuario.getSobrenome() + "\nR.A.: " + usuario.getRegistroAcademico(), "Usuário encontrado!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

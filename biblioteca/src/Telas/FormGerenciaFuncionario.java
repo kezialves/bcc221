@@ -28,6 +28,7 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
         menuBuscarEmprestimo = new javax.swing.JMenuItem();
         menuBuscarFuncionario = new javax.swing.JMenuItem();
         menuBuscarLivro = new javax.swing.JMenuItem();
+        menuBuscarUsuario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -54,7 +55,7 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
         });
         menuBuscar.add(menuBuscarAutor);
 
-        menuBuscarCategorias.setText("Categorias");
+        menuBuscarCategorias.setText("Categoria");
         menuBuscarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBuscarCategoriasActionPerformed(evt);
@@ -62,7 +63,7 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
         });
         menuBuscar.add(menuBuscarCategorias);
 
-        menuBuscarEmprestimo.setText("Emprestimo");
+        menuBuscarEmprestimo.setText("Empréstimo");
         menuBuscarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBuscarEmprestimoActionPerformed(evt);
@@ -70,7 +71,7 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
         });
         menuBuscar.add(menuBuscarEmprestimo);
 
-        menuBuscarFuncionario.setText("Funcionario");
+        menuBuscarFuncionario.setText("Funcionário");
         menuBuscarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBuscarFuncionarioActionPerformed(evt);
@@ -85,6 +86,15 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
             }
         });
         menuBuscar.add(menuBuscarLivro);
+
+        menuBuscarUsuario.setText("Usuário");
+        menuBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBuscarUsuarioActionPerformed(evt);
+            }
+        });
+        menuBuscar.add(menuBuscarUsuario);
+
 
         jMenuBar1.add(menuBuscar);
 
@@ -171,6 +181,16 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuBuscarLivroActionPerformed
 
+    private void menuBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarLivroActionPerformed
+       
+        FormUsuario form = new FormUsuario(2);
+        
+        form.setTitle("Usuário");
+        form.setLocationRelativeTo(null);// no centro
+        form.setResizable(false); // retira o botão maximizar
+        form.setVisible(true); // mostra a janela
+    }//GEN-LAST:event_menuBuscarLivroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,6 +234,7 @@ public class FormGerenciaFuncionario extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuBuscarEmprestimo;
     private javax.swing.JMenuItem menuBuscarFuncionario;
     private javax.swing.JMenuItem menuBuscarLivro;
+    private javax.swing.JMenuItem menuBuscarUsuario;
     private javax.swing.JMenu menuGerenciar;
     private javax.swing.JMenuItem menuGerenciarEmprestimo;
     // End of variables declaration//GEN-END:variables
