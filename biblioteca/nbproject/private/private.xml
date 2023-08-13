@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Telas/FormFuncionario.java</file>
-            <file>file:/home/kez/NetBeansProjects/biblioteca/src/Telas/FormUsuario.java</file>
+            <file>file:/home/vodiniz/NetBeansProjects/biblioteca/biblioteca/src/Telas/FormAutor.java</file>
+            <file>file:/home/vodiniz/NetBeansProjects/biblioteca/biblioteca/src/Telas/FormEmprestimo.java</file>
+            <file>file:/home/vodiniz/NetBeansProjects/biblioteca/biblioteca/src/Telas/FormCategorias.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,3 +1,12 @@
+ /*
+ *
+ * Bruno Alves Braga
+ * Jéssica Machado
+ * Kézia Batista Alves da Conceição Brito
+ * Vitor Oliveira Diniz
+ * 
+ */
+
 package Principal;
 
 import Telas.*;

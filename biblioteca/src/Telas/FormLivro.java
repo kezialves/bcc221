@@ -94,7 +94,7 @@ public class FormLivro extends javax.swing.JFrame {
         jPanel2.add(btnRemover);
 
         btnAtualizar.setText("Atualizar");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarActionPerformed(evt);
             }
@@ -406,6 +406,18 @@ public class FormLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
             // txtID.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            if(tituloString.isEmpty()) {
+                throw new IllegalArgumentException("Título inválido! O título do livro não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtTitulo.requestFocus();
+            // txtNome.setBackground(vermelho);
             return;
         }
 
