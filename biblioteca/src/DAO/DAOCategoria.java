@@ -22,7 +22,7 @@ public class DAOCategoria implements DAOInterface {
             
             // Compara os ids da lista de categorias com o passado por parâmetro
             if(categoria.equals(objeto)) {
-                throw new IllegalArgumentException("Erro! A categoria já está presente na lista!"); 
+                throw new IllegalArgumentException("Erro! Já existe uma categoria com esse ID"); 
             }
         }
 

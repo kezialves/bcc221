@@ -10,6 +10,12 @@ import Modelo.Autor;
 
 public class FormAutor extends javax.swing.JFrame {
 
+    //1 - Adm
+    //2 - Funcionario
+    //3 - Usuario
+    
+    int tipoFuncionario;
+
     /**
      * Creates new form FormAutor
      */
@@ -17,6 +23,16 @@ public class FormAutor extends javax.swing.JFrame {
         initComponents();
     }
 
+    public FormAutor(int tipoFuncionario) {
+        initComponents();
+        this.tipoFuncionario = tipoFuncionario;
+
+        if(tipoFuncionario == 2){
+            this.btnAdicionar.setEnabled(false);
+            this.btnRemover.setEnabled(false);
+            this.btnAtualizar.setEnabled(false);
+        }
+    }
 
     DAOAutor daoAutor = new DAOAutor();
 
@@ -49,7 +65,8 @@ public class FormAutor extends javax.swing.JFrame {
 
         jMenu1.setText("jMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("ID:");
 
@@ -107,7 +124,7 @@ public class FormAutor extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -127,15 +144,16 @@ public class FormAutor extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(182, 182, 182)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,7 +172,7 @@ public class FormAutor extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(153, 153, 153))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,14 +180,14 @@ public class FormAutor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -185,6 +203,10 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
 
         // ID inválido
         try {
@@ -192,6 +214,8 @@ public class FormAutor extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            txtID.setBackground(vermelho);
             return;
         }
 
@@ -227,7 +251,11 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
-        Color c = new Color(175, 0, 0);
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
+        txtNome.setBackground(nulo);
 
         // ID inválido
         try {
@@ -236,7 +264,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(c);
+            txtID.setBackground(vermelho);
             return;
         }
 
@@ -249,7 +277,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtNome.requestFocus();
-            txtNome.setBackground(c);
+            txtNome.setBackground(vermelho);
             return;
         }
 
@@ -261,7 +289,7 @@ public class FormAutor extends javax.swing.JFrame {
             daoAutor.incluir(autor);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao incluir o autor! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -278,7 +306,6 @@ public class FormAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        Color c = new Color(255, 0, 0);
 
         String idString = txtID.getText();
         String nomeString = txtNome.getText();
@@ -286,6 +313,10 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
 
         // ID inválido
         try {
@@ -294,7 +325,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(c);
+            txtID.setBackground(vermelho);
             return;
         }
         
@@ -318,7 +349,6 @@ public class FormAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        Color c = new Color(255, 0, 0);
 
         String idString = txtID.getText();
         String nomeString = txtNome.getText();
@@ -326,14 +356,33 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
 
+        txtID.setBackground(nulo);
+        txtNome.setBackground(nulo);
+
+        // ID inválido
         try {
             id = Integer.parseInt(idString);
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(c);
+            txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do autor não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtNome.requestFocus();
+            txtNome.setBackground(vermelho);
             return;
         }
 

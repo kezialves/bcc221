@@ -1,5 +1,6 @@
 package Telas;
 
+import java.awt.*;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import java.text.ParseException;
@@ -12,12 +13,27 @@ import java.util.NoSuchElementException;
 
 public class FormEmprestimo extends javax.swing.JFrame {
 
+
+    int tipoUsuario;
     /**
      * Creates new form FormAutor
      */
     public FormEmprestimo() {
         initComponents();
     }
+
+    // 1 - usuario normal, 2 - funcionario, 3 - chefe
+    public FormEmprestimo(int tipoUsuario) {
+        initComponents();
+
+        this.tipoUsuario = tipoUsuario;
+
+        if(this.tipoUsuario == 1){
+            this.btnAdicionar.setEnabled(false);
+        }
+
+    }
+
 
     DAOEmprestimo daoEmprestimo = new DAOEmprestimo();
     //DAOAutor daoAutor = new DAOAutor();
@@ -45,10 +61,15 @@ public class FormEmprestimo extends javax.swing.JFrame {
         txtIDFuncionario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
+
+
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
+
+
+
         txtIDLivro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -56,7 +77,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
 
         jMenu1.setText("jMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 
@@ -201,6 +222,12 @@ public class FormEmprestimo extends javax.swing.JFrame {
         
         String idString = txtID.getText();
 
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
+        
+
         int id = 0;
 
         // ID inválido
@@ -210,6 +237,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.setBackground(vermelho);
+            txtID.requestFocus();
             return;
         }
 
@@ -244,6 +273,12 @@ public class FormEmprestimo extends javax.swing.JFrame {
             idFuncionario = 0,
             idUsuario = 0,
             idLivro = 0;
+
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
+        txtData.setBackground(nulo);
             
         // ID inválido
         try {
@@ -278,6 +313,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch (ParseException exception) {
             JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtData.setBackground(vermelho);
+            txtData.requestFocus();
             return;
         }
 
@@ -313,6 +350,11 @@ public class FormEmprestimo extends javax.swing.JFrame {
             idFuncionario = 0,
             idUsuario = 0,
             idLivro = 0;
+
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
             
         // ID inválido
         try {
@@ -320,6 +362,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.setBackground(vermelho);
+            txtID.requestFocus();
             return;
         }
 
@@ -364,6 +408,12 @@ public class FormEmprestimo extends javax.swing.JFrame {
             idFuncionario = 0,
             idUsuario = 0,
             idLivro = 0;
+
+        Color vermelho = new Color(255, 0, 0, 40);
+        Color nulo = new Color(255, 255, 255, 255);
+
+        txtID.setBackground(nulo);
+        txtData.setBackground(nulo);
             
         // ID inválido
         try {
@@ -374,6 +424,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            txtID.setBackground(vermelho);
             return;
         }
 
@@ -398,6 +450,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch (ParseException exception) {
             JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtData.requestFocus();
+            txtData.setBackground(vermelho);
             return;
         }
 
@@ -461,6 +515,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
                 tela.setLocationRelativeTo(null);
                 tela.setTitle("Emprestimo");
                 tela.setVisible(true);
+
             }
         });
     }

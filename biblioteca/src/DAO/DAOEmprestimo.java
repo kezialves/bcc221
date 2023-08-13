@@ -22,7 +22,7 @@ public class DAOEmprestimo implements DAOInterface {
             
             // Compara os ids da lista de empréstimos com o passado por parâmetro
             if(emprestimo.equals(objeto)) {
-                throw new IllegalArgumentException("Erro! O empréstimo já está presente na lista!"); // retorna o index do id se achar
+                throw new IllegalArgumentException("Erro! já existe um emprestimo com esse ID."); // retorna o index do id se achar
             }
         }
 

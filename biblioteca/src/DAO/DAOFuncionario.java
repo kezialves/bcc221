@@ -23,7 +23,7 @@ public class DAOFuncionario implements DAOInterface {
             
                 // Compara os ids da lista de funcionario com o passado por parâmetro
                 if(funcionario.equals(objeto)) {
-                    throw new IllegalArgumentException("Erro! O funcionário já está presente na lista!"); // retorna o index do id se achar
+                    throw new IllegalArgumentException("Erro! Já existe um funcionário com esse ID."); // retorna o index do id se achar
                 }
             }
         }

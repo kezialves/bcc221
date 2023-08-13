@@ -92,13 +92,16 @@ public class Livro {
         String stringAutores = "";
         String stringCategorias = "";
         
-        for(Livro livro: Dados.listaLivros){
-            stringAutores = stringAutores + livro.getAutor() + " ";
-            stringCategorias = stringCategorias + livro.getCategoria() + " ";
+        for(Autor autor: this.getAutor()){
+            stringAutores = stringAutores + autor + " ";
         }
-        
+
+        for(Categoria categoria: this.getCategoria()){
+            stringCategorias = stringCategorias + categoria + " ";
+        }
+
         return getId() + " - " + getTitulo() + ":\n\t" + 
                 "Autores: " + stringAutores +
-                "Categorias: " + stringCategorias + "\n";
+                "\nCategorias: " + stringCategorias + "\n";
     }
 }

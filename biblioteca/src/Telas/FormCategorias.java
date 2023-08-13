@@ -9,6 +9,8 @@ import javax.swing.*;
 
 public class FormCategorias extends javax.swing.JFrame {
 
+    int tipoFuncionario;
+
     /**
      * Creates new form FormAutor
      */
@@ -16,6 +18,16 @@ public class FormCategorias extends javax.swing.JFrame {
         initComponents();
     }
 
+    public FormCategorias(int tipoFuncionario){
+        initComponents();
+        this.tipoFuncionario = tipoFuncionario;
+
+        if(tipoFuncionario == 2){
+            this.btnAdicionar.setEnabled(false);
+            this.btnRemover.setEnabled(false);
+            this.btnAtualizar.setEnabled(false);
+        }
+    }
     DAOCategoria daoCategoria = new DAOCategoria();
 
     /**
@@ -39,7 +51,7 @@ public class FormCategorias extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
 

@@ -22,7 +22,7 @@ public class DAOAutor implements DAOInterface {
         
         for(Autor autor: Dados.listaAutores){
             if(autor.equals(objeto))
-                throw new IllegalArgumentException("Erro! O autor já está presente na lista!");
+                throw new IllegalArgumentException("Erro! Já existe um autor com esse ID");
         }
 
         Autor autor = (Autor) objeto;

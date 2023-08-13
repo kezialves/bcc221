@@ -16,30 +16,19 @@ public class DAOLivro implements DAOInterface{
         if(objeto == null)
             throw new IllegalArgumentException("Erro! Livro nulo!") ;
     
-        if(!(objeto instanceof Categoria))
+        if(!(objeto instanceof Livro))
             throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um livro!");
-
-        if(!Dados.listaLivros.isEmpty()){
-
-            for(Livro livro: Dados.listaLivros) {
-            
-                // Compara os ids da lista de livros com o passado por parâmetro
-                if(livro.equals(objeto)) {
-                    throw new IllegalArgumentException("Erro! O livro já está presente na lista!"); // retorna o index do id se achar
-                }
-            }
-        }
 
         for(Livro livro: Dados.listaLivros) {
             
             // Compara os ids da lista de livros com o passado por parâmetro
             if(livro.equals(objeto)) {
-                throw new IllegalArgumentException(); // retorna o index do id se achar
+                throw new IllegalArgumentException("Erro! Já existe um livro com esse ID!"); // retorna o index do id se achar
             }
         }
 
         Livro novoLivro = (Livro) objeto;
-        Dados.listaLivros.add(novoLivro);
+        Dados.listaLivros.add(novoLivro); 
     }
 
     @Override
@@ -91,4 +80,6 @@ public class DAOLivro implements DAOInterface{
         listaObjeto.addAll(Dados.listaLivros);
         return listaObjeto;
     }
+
+
 }

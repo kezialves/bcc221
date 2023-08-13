@@ -21,13 +21,26 @@ public class FormLivro extends javax.swing.JFrame {
     DAOAutor daoAutor = new DAOAutor();
     DAOCategoria daoCategoria = new DAOCategoria();
 
+    int tipoFuncionario;
     /**
      * Creates new form FormAutor
      */
     public FormLivro() {
         initComponents();
     }
+    
+    public FormLivro(int tipoFuncionario){
+        initComponents();
+        this.tipoFuncionario = tipoFuncionario;
 
+        if(tipoFuncionario == 2 || tipoFuncionario == 3){
+            this.btnAdicionar.setEnabled(false);
+            this.btnRemover.setEnabled(false);
+            this.btnAtualizar.setEnabled(false);
+        }
+    }
+
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,15 +71,9 @@ public class FormLivro extends javax.swing.JFrame {
 
         jMenu1.setText("jMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID:");
-
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Título:");
 
@@ -103,26 +110,30 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel4.setText("Autores:");
 
-        DefaultListModel model = new DefaultListModel();
-        for(Object element: daoCategoria.getLista()){
-            model.addElement(element);
+        DefaultListModel autoresModel = new DefaultListModel();
+        for(Object element: daoAutor.getLista()){
+            autoresModel.addElement(element);
 
         }
 
-        model.addElement(new Autor(1, "Vitor", "Diniz", "Chato"));
-        model.addElement(new Autor(2, "Kézia", "Alves", "Gosta de brigar com o Vitor"));
+        autoresModel.addElement(new Autor(1, "Vitor", "Diniz", "Chato"));
+        autoresModel.addElement(new Autor(2, "Kézia", "Alves", "Gosta de brigar com o Vitor"));
 
-        jListAutores.setModel(model);
+        jListAutores.setModel(autoresModel);
         jScrollPane2.setViewportView(jListAutores);
 
         jListAutores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jListCategorias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        jListCategorias.setModel(new javax.swing.AbstractListModel<Object>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        DefaultListModel categoriaModel = new DefaultListModel();
+        for(Object element: daoCategoria.getLista()){
+            categoriaModel.addElement(element);
+
+        }
+
+        categoriaModel.addElement(new Categoria(1, "Dark Romance"));
+
+        jListCategorias.setModel(categoriaModel);
         jScrollPane3.setViewportView(jListCategorias);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -215,6 +226,11 @@ public class FormLivro extends javax.swing.JFrame {
         String idString = txtID.getText();
         String tituloString = txtTitulo.getText();
         
+        // Pega todos os autores que a pessoa selecionou na telinha e coloca num arraylist
+        List<Autor> listaAutores = (List<Autor>)(List<?>) jListAutores.getSelectedValuesList();
+        // Pega todas as categorias que a pessoa selecionou na telinha e coloca num arraylist
+        List<Categoria> listaCategoria = (List<Categoria>)(List<?>) jListCategorias.getSelectedValuesList();
+
         int id = 0;
 
         // ID inválido
@@ -228,8 +244,8 @@ public class FormLivro extends javax.swing.JFrame {
 
         // Remove o livro
 
-        Livro livro = new Livro(id, tituloString, new Categoria(id, tituloString), new Autor(id, tituloString, idString, tituloString));
-        
+        Livro livro = new Livro(id, tituloString, listaCategoria, listaAutores);
+
         try {
             daoLivro.remover(livro);
         }
@@ -253,15 +269,11 @@ public class FormLivro extends javax.swing.JFrame {
         String idString = txtID.getText();
         String tituloString = txtTitulo.getText();
 
-        //Pega todos os autores que a pessoa escreveu na telinha e coloca num arraylist
-        List<Autor> listaAutores = new ArrayList<>();
-        for(int i = 0; i< jListCategorias.getModel().getSize();i++){
-            listaAutores.add((Autor)jListCategorias.getModel().getElementAt(i));
-            //System.out.println(jListCategorias.getModel().getElementAt(i));
-        }
-
-        //categorias e autores ?????
-        
+        // Pega todos os autores que a pessoa selecionou na telinha e coloca num arraylist
+        List<Autor> listaAutores = (List<Autor>)(List<?>) jListAutores.getSelectedValuesList();
+        // Pega todas as categorias que a pessoa selecionou na telinha e coloca num arraylist
+        List<Categoria> listaCategoria = (List<Categoria>)(List<?>) jListCategorias.getSelectedValuesList();
+                
         int id = 0;
 
         // ID inválido
@@ -286,31 +298,64 @@ public class FormLivro extends javax.swing.JFrame {
             return;
         }
 
-        // Adiciona o autor
+        if(listaCategoria.size() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione pelo menos 1 Categoria!", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            // jListCategorias.requestFocus();
+            return;
+        }
 
-        Livro livro = new Livro(1, "tituloString", new Categoria(1, "tituloString"), new Autor(1, "nome", "sobrenome", "biografia"));
+        if(listaAutores.size() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione pelo menos 1 Autor!", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            // jListAutores.requestFocus();
+            return;
+        }
+
+        // Adiciona o livro
+        Livro livro = new Livro(id, tituloString, listaCategoria, listaAutores);
         
         try {
             daoLivro.incluir(livro);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao incluir o autor! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
         txtID.setText("");
         txtTitulo.setText("");
 
-        JOptionPane.showMessageDialog(null, "Autor incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
-
+        JOptionPane.showMessageDialog(null, "Livro incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TOD add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
-
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        // TODO add your handling code here:
+        String idString = txtID.getText();
+    
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            return;
+        }
+
+        Livro livro = null;
+
+        try{
+            livro = (Livro) daoLivro.localizar(id);
+        } catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+        }
+
+        JOptionPane.showMessageDialog(null, livro, "Livro Encontrado!", JOptionPane.PLAIN_MESSAGE);
+
+        for(Autor autor: livro.getAutor()){
+            System.out.println(autor);
+        }
+
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     /**
