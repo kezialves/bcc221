@@ -113,7 +113,7 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel4.setText("Autores:");
 
-        DefaultListModel autoresModel = new DefaultListModel();
+        DefaultListModel<Object> autoresModel = new DefaultListModel<Object>();
         for(Object element: daoAutor.getLista()){
             autoresModel.addElement(element);
 
