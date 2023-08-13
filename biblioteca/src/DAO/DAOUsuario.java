@@ -34,7 +34,7 @@ public class DAOUsuario implements DAOInterface {
             
             // Compara os ids da lista de usuários com o passado por parâmetro
             if(usuario.equals(objeto)) {
-                throw new IllegalArgumentException(); // retorna o index do id se achar
+                throw new IllegalArgumentException("ID do Usuario não encontrado!"); // retorna o index do id se achar
             }
         }
 

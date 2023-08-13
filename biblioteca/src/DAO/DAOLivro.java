@@ -50,7 +50,7 @@ public class DAOLivro implements DAOInterface{
                 return livro;
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("ID do Livro não encontrado!");
     }
 
     @Override

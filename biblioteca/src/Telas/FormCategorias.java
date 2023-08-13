@@ -173,6 +173,7 @@ public class FormCategorias extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
             return;
         }
         
@@ -194,18 +195,6 @@ public class FormCategorias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
-
-
-
-
-
-
-
-
-
-
-
-
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         
         String idString = txtID.getText();
@@ -219,6 +208,7 @@ public class FormCategorias extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
             return;
         }
 
@@ -245,24 +235,6 @@ public class FormCategorias extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         
         String idString = txtID.getText();
@@ -276,6 +248,7 @@ public class FormCategorias extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
             return;
         }
 
@@ -287,6 +260,7 @@ public class FormCategorias extends javax.swing.JFrame {
         }
         catch(IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtTitulo.requestFocus();
             return;
         }
 
@@ -311,29 +285,6 @@ public class FormCategorias extends javax.swing.JFrame {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TOD add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
@@ -349,6 +300,7 @@ public class FormCategorias extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
             return;
         }
 
@@ -402,7 +354,11 @@ public class FormCategorias extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCategorias().setVisible(true);
+                FormCategorias tela;
+                tela = new FormCategorias();    
+                tela.setLocationRelativeTo(null);
+                tela.setTitle("Categorias");
+                tela.setVisible(true);
             }
         });
     }

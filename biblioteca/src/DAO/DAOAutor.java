@@ -41,7 +41,7 @@ public class DAOAutor implements DAOInterface {
             }
         }
         
-        throw new NoSuchElementException("ID não encontrado!"); // se não achar
+        throw new NoSuchElementException("ID do Autor não encontrado!"); // se não achar
     }
 
     @Override

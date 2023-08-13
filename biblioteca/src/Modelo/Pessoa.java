@@ -63,6 +63,6 @@ public class Pessoa {
     }
 
     public String toString(){
-        return getId() + " Nome: " + getNome() + "- Sobrenome: " + getSobrenome();
+        return getId() + " - " + getSobrenome().toUpperCase() + ", " + getNome();
     }
 }

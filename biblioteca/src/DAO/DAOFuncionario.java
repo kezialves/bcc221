@@ -44,7 +44,7 @@ public class DAOFuncionario implements DAOInterface {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("ID do funcionário não encontrado!");
     }
 
     @Override

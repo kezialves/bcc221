@@ -1,9 +1,25 @@
 package Telas;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.ArrayList;
+
+import javax.swing.ListSelectionModel;
+import Modelo.Livro;
 import DAO.DAOLivro;
+import DAO.DAOAutor;
+import DAO.DAOCategoria;
+import Modelo.Categoria;
+import Modelo.Autor;
 import Modelo.Livro;
 
 public class FormLivro extends javax.swing.JFrame {
+    
+    DAOLivro daoLivro = new DAOLivro();
+    DAOAutor daoAutor = new DAOAutor();
+    DAOCategoria daoCategoria = new DAOCategoria();
 
     /**
      * Creates new form FormAutor
@@ -35,8 +51,10 @@ public class FormLivro extends javax.swing.JFrame {
         btnLocalizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        choiceCategorias = new java.awt.Choice();
-        choiceAutores = new java.awt.Choice();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListAutores = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListCategorias = new javax.swing.JList<>();
 
         jMenu1.setText("jMenu1");
 
@@ -85,6 +103,28 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel4.setText("Autores:");
 
+        DefaultListModel model = new DefaultListModel();
+        for(Object element: daoCategoria.getLista()){
+            model.addElement(element);
+
+        }
+
+        model.addElement(new Autor(1, "Vitor", "Diniz", "Chato"));
+        model.addElement(new Autor(2, "Kézia", "Alves", "Gosta de brigar com o Vitor"));
+
+        jListAutores.setModel(model);
+        jScrollPane2.setViewportView(jListAutores);
+
+        jListAutores.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jListCategorias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        jListCategorias.setModel(new javax.swing.AbstractListModel<Object>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jListCategorias);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,23 +135,28 @@ public class FormLivro extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(182, 182, 182)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(choiceCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(choiceAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(182, 182, 182)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,26 +169,33 @@ public class FormLivro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(choiceCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(choiceAutores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -152,7 +204,7 @@ public class FormLivro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,11 +212,97 @@ public class FormLivro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        String idString = txtID.getText();
+        String tituloString = txtTitulo.getText();
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Remove o livro
+
+        Livro livro = new Livro(id, tituloString, new Categoria(id, tituloString), new Autor(id, tituloString, idString, tituloString));
+        
+        try {
+            daoLivro.remover(livro);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtTitulo.setText("");
+        
+        JOptionPane.showMessageDialog(null, "Livro removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
+
+        String idString = txtID.getText();
+        String tituloString = txtTitulo.getText();
+
+        //Pega todos os autores que a pessoa escreveu na telinha e coloca num arraylist
+        List<Autor> listaAutores = new ArrayList<>();
+        for(int i = 0; i< jListCategorias.getModel().getSize();i++){
+            listaAutores.add((Autor)jListCategorias.getModel().getElementAt(i));
+            //System.out.println(jListCategorias.getModel().getElementAt(i));
+        }
+
+        //categorias e autores ?????
+        
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(tituloString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do livro não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtTitulo.requestFocus();
+            return;
+        }
+
+        // Adiciona o autor
+
+        Livro livro = new Livro(1, "tituloString", new Categoria(1, "tituloString"), new Autor(1, "nome", "sobrenome", "biografia"));
+        
+        try {
+            daoLivro.incluir(livro);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, "Erro ao incluir o autor! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtTitulo.setText("");
+
+        JOptionPane.showMessageDialog(null, "Autor incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -206,7 +344,11 @@ public class FormLivro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormLivro().setVisible(true);
+                FormLivro tela;
+                tela = new FormLivro();    
+                tela.setLocationRelativeTo(null);
+                tela.setTitle("Livro");
+                tela.setVisible(true);
             }
         });
     }
@@ -216,15 +358,17 @@ public class FormLivro extends javax.swing.JFrame {
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnLocalizar;
     private javax.swing.JButton btnRemover;
-    private java.awt.Choice choiceAutores;
-    private java.awt.Choice choiceCategorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<Object> jListAutores;
+    private javax.swing.JList<Object> jListCategorias;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTitulo;

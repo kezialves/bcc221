@@ -11,11 +11,20 @@ public class Livro {
     private List<Autor> listaAutores;
     
     // Construtor de livro
-    public Livro(int id, String titulo, List<Categoria> categoria, List<Autor> autor) {
+    public Livro(int id, String titulo, Categoria categoria, Autor autor) {
         this.id = id;
         this.titulo = titulo;
         this.listaCategorias = new ArrayList<>();
+        listaCategorias.add(categoria);
         this.listaAutores = new ArrayList<>();
+        listaAutores.add(autor);
+    }
+
+    public Livro(int id, String titulo, List<Categoria> categorias, List<Autor> autores) {
+        this.id = id;
+        this.titulo = titulo;
+        this.listaCategorias = categorias;
+        this.listaAutores = autores;
     }
     
     // Getter e setter do id

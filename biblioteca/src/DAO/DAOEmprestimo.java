@@ -41,7 +41,7 @@ public class DAOEmprestimo implements DAOInterface {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("ID do empréstimo não encontrado!");
     }
 
 	@Override
@@ -68,17 +68,6 @@ public class DAOEmprestimo implements DAOInterface {
         if(!(objeto instanceof Emprestimo))
             throw new IllegalArgumentException();
 
-        if(!Dados.listaEmprestimos.isEmpty()){
-
-            for(Emprestimo emprestimo: Dados.listaEmprestimos) {
-            
-                // Compara os ids da lista de emprestimos com o passado por parâmetro
-                if(emprestimo.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
-                }
-            }
-        }
-
         Emprestimo emprestimo = (Emprestimo) objeto;
         
         // Usa a função localizar pra saber se o emprestimo está presente na lista
@@ -88,10 +77,10 @@ public class DAOEmprestimo implements DAOInterface {
 
 	@Override
     public List<Object> getLista() {
+        
         List<Object> listaObjeto = new ArrayList<>();
         listaObjeto.addAll(Dados.listaEmprestimos);
+        
         return listaObjeto;
-    }    
-
-
+    }
 }

@@ -5,9 +5,10 @@ import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.Dimension;
-import DAO.DAOEmprestimo;
+import DAO.*;
 import Modelo.Emprestimo;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 public class FormEmprestimo extends javax.swing.JFrame {
 
@@ -19,6 +20,11 @@ public class FormEmprestimo extends javax.swing.JFrame {
     }
 
     DAOEmprestimo daoEmprestimo = new DAOEmprestimo();
+    //DAOAutor daoAutor = new DAOAutor();
+    DAOCategoria daoCategoria = new DAOCategoria();
+    DAOFuncionario daoFuncionario = new DAOFuncionario();
+    DAOLivro daoLivro = new DAOLivro();
+    DAOUsuario daoUsuario = new DAOUsuario();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,7 +115,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -129,7 +135,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(357, 357, 357)
+                        .addGap(0, 0, 0)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
@@ -168,7 +174,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,23 +182,54 @@ public class FormEmprestimo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        // TODO add your handling code here:
+        
+        String idString = txtID.getText();
+
+        int id = 0;
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        // Adiciona um empréstimo
+        
+        try {
+            daoEmprestimo.localizar(id);
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtData.setText("");
+        txtIDFuncionario.setText("");
+        txtIDLivro.setText("");
+        txtIDUsuario.setText("");
+
+        JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -217,6 +254,15 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        try{
+            daoFuncionario.localizar(idFuncionario);
+            daoUsuario.localizar(idUsuario);
+            daoLivro.localizar(idLivro);
+        } catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Digite um ID válido.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -267,7 +313,58 @@ public class FormEmprestimo extends javax.swing.JFrame {
             idFuncionario = 0,
             idUsuario = 0,
             idLivro = 0;
+            
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
 
+        Date data = new Date();
+
+        // Adiciona um empréstimo
+        Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
+        
+        try {
+            daoEmprestimo.remover(emprestimo);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        } catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtData.setText("");
+        txtIDFuncionario.setText("");
+        txtIDLivro.setText("");
+        txtIDUsuario.setText("");
+
+        JOptionPane.showMessageDialog(null, "Empréstimo removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TOD add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+        String idString = txtID.getText();
+        String idFuncionarioString = txtIDFuncionario.getText();
+        String idUsuarioString = txtIDUsuario.getText();
+        String idLivroString = txtIDLivro.getText();
+        String dataEmprestimoString = txtData.getText();
+        
+        int id = 0,
+            idFuncionario = 0,
+            idUsuario = 0,
+            idLivro = 0;
+            
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -280,36 +377,51 @@ public class FormEmprestimo extends javax.swing.JFrame {
             return;
         }
 
-        // Remove o empréstimo
+        try{
+            daoFuncionario.localizar(idFuncionario);
+            daoUsuario.localizar(idUsuario);
+            daoLivro.localizar(idLivro);
+        } catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Digite um ID válido.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
 
-        // Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, );
+        Date data;
         
-        // try {
-        //     daoAutor.remover(autor);
-        // }
-        // catch(IllegalArgumentException exception) {
-        //     JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
-        //     return;
-        // }
-        // catch(NoSuchElementException exception) {
-        //     JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-        //     return;
-        // }
-
-        // txtID.setText("");
-        // txtNome.setText("");
-        // txtSobrenome.setText("");
-        // txtBiografia.setText("");
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
         
-        // JOptionPane.showMessageDialog(null, "Autor removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_btnRemoverActionPerformed
+        //Garante que minha data será válida.
+        formatDate.setLenient(false);
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TOD add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
+        try {
+            data = formatDate.parse(dataEmprestimoString);
+        }
+        catch (ParseException exception) {
+            JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        // Adiciona um empréstimo
+        Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
         
+        try {
+            daoEmprestimo.atualizar(emprestimo);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        } catch (NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + "Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtData.setText("");
+        txtIDFuncionario.setText("");
+        txtIDLivro.setText("");
+        txtIDUsuario.setText("");
+
+        JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
         
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
@@ -344,7 +456,11 @@ public class FormEmprestimo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEmprestimo().setVisible(true);
+                FormEmprestimo tela;
+                tela = new FormEmprestimo();    
+                tela.setLocationRelativeTo(null);
+                tela.setTitle("Emprestimo");
+                tela.setVisible(true);
             }
         });
     }

@@ -41,7 +41,7 @@ public class DAOCategoria implements DAOInterface {
             }
         }
 
-        throw new NoSuchElementException("ID não encontrado!");
+        throw new NoSuchElementException("ID da Categoria não encontrado!");
     }
 
     @Override

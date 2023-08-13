@@ -206,7 +206,10 @@ public class FormUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormUsuario().setVisible(true);
+                FormUsuario tela;
+                tela = new FormUsuario();    
+                tela.setLocationRelativeTo(null);
+                tela.setVisible(true);
             }
         });
     }
