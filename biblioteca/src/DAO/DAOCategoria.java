@@ -22,7 +22,7 @@ public class DAOCategoria implements DAOInterface {
             
             // Compara os ids da lista de categorias com o passado por parâmetro
             if(categoria.equals(objeto)) {
-                throw new IllegalArgumentException("Erro! Já existe uma categoria com esse ID"); 
+                throw new IllegalArgumentException("Já existe uma categoria com esse ID."); 
             }
         }
 
@@ -41,7 +41,7 @@ public class DAOCategoria implements DAOInterface {
             }
         }
 
-        throw new NoSuchElementException("ID da Categoria não encontrado!");
+        throw new NoSuchElementException("ID da categoria não encontrado!");
     }
 
     @Override
@@ -52,17 +52,6 @@ public class DAOCategoria implements DAOInterface {
     
         if(!(objeto instanceof Categoria))
             throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é uma categoria!");
-
-        if(!Dados.listaFuncionarios.isEmpty()){
-
-            for(Categoria categoria: Dados.listaCategorias) {
-            
-                // Compara os ids da lista de categorias com o passado por parâmetro
-                if(categoria.equals(objeto)) {
-                    throw new IllegalArgumentException("Erro! A categoria já está presente na lista!"); // retorna o index do id se achar
-                }
-            }
-        }
 
         Categoria categoriaAtualizado = (Categoria) objeto;
         Categoria categoria = (Categoria) localizar(categoriaAtualizado.getId());

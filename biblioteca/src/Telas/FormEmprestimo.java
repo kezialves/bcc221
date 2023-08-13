@@ -1,11 +1,8 @@
 package Telas;
 
-import java.awt.*;
 import javax.swing.JOptionPane;
-import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.awt.Dimension;
 import DAO.*;
 import Modelo.Emprestimo;
 import java.util.Date;
@@ -61,15 +58,10 @@ public class FormEmprestimo extends javax.swing.JFrame {
         txtIDFuncionario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-
-
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
-
-
-
         txtIDLivro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -78,6 +70,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("ID:");
 
@@ -153,12 +146,11 @@ public class FormEmprestimo extends javax.swing.JFrame {
                         .addGap(85, 85, 85)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addComponent(txtIDLivro, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtIDUsuario, javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,11 +159,11 @@ public class FormEmprestimo extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIDFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,7 +181,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,33 +194,29 @@ public class FormEmprestimo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        
+
         String idString = txtID.getText();
-
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
-
-        txtID.setBackground(nulo);
         
-
         int id = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
 
         // ID inválido
         try {
@@ -237,15 +225,17 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-            txtID.setBackground(vermelho);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
 
         // Adiciona um empréstimo
-        
+
+        Emprestimo emprestimo = null;
+
         try {
-            daoEmprestimo.localizar(id);
+            emprestimo = (Emprestimo) daoEmprestimo.localizar(id);
         }
         catch(NoSuchElementException exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
@@ -258,28 +248,28 @@ public class FormEmprestimo extends javax.swing.JFrame {
         txtIDLivro.setText("");
         txtIDUsuario.setText("");
 
-        JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, emprestimo, "Localizado!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
 
         String idString = txtID.getText();
         String idFuncionarioString = txtIDFuncionario.getText();
         String idUsuarioString = txtIDUsuario.getText();
         String idLivroString = txtIDLivro.getText();
         String dataEmprestimoString = txtData.getText();
-        
+
         int id = 0,
-            idFuncionario = 0,
-            idUsuario = 0,
-            idLivro = 0;
+        idFuncionario = 0,
+        idUsuario = 0,
+        idLivro = 0;
 
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
-        txtData.setBackground(nulo);
-            
+        // txtID.setBackground(nulo);
+        // txtData.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -289,6 +279,8 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
 
@@ -302,9 +294,9 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
 
         Date data;
-        
+
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         //Garante que minha data será válida.
         formatDate.setLenient(false);
 
@@ -313,19 +305,22 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch (ParseException exception) {
             JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-            txtData.setBackground(vermelho);
             txtData.requestFocus();
+            // txtData.setBackground(vermelho);
             return;
         }
 
         // Adiciona um empréstimo
         Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
-        
+
         try {
-            daoEmprestimo.incluir(emprestimo);
+            daoEmprestimo.atualizar(emprestimo);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao incluir o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        } catch (NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -335,35 +330,31 @@ public class FormEmprestimo extends javax.swing.JFrame {
         txtIDLivro.setText("");
         txtIDUsuario.setText("");
 
-        JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+        JOptionPane.showMessageDialog(null, "Empréstimo atualizado!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        
+
         String idString = txtID.getText();
-        String idFuncionarioString = txtIDFuncionario.getText();
-        String idUsuarioString = txtIDUsuario.getText();
-        String idLivroString = txtIDLivro.getText();
-        String dataEmprestimoString = txtData.getText();
-        
+
         int id = 0,
-            idFuncionario = 0,
-            idUsuario = 0,
-            idLivro = 0;
+        idFuncionario = 0,
+        idUsuario = 0,
+        idLivro = 0;
 
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
-            
+        // txtID.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-            txtID.setBackground(vermelho);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
 
@@ -371,7 +362,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
 
         // Adiciona um empréstimo
         Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
-        
+
         try {
             daoEmprestimo.remover(emprestimo);
         }
@@ -392,29 +383,25 @@ public class FormEmprestimo extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Empréstimo removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TOD add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        
         String idString = txtID.getText();
         String idFuncionarioString = txtIDFuncionario.getText();
         String idUsuarioString = txtIDUsuario.getText();
         String idLivroString = txtIDLivro.getText();
         String dataEmprestimoString = txtData.getText();
-        
+
         int id = 0,
-            idFuncionario = 0,
-            idUsuario = 0,
-            idLivro = 0;
+        idFuncionario = 0,
+        idUsuario = 0,
+        idLivro = 0;
 
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
-        txtData.setBackground(nulo);
-            
+        // txtID.setBackground(nulo);
+        // txtData.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -424,8 +411,6 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-            txtID.requestFocus();
-            txtID.setBackground(vermelho);
             return;
         }
 
@@ -439,9 +424,9 @@ public class FormEmprestimo extends javax.swing.JFrame {
         }
 
         Date data;
-        
+
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         //Garante que minha data será válida.
         formatDate.setLenient(false);
 
@@ -451,21 +436,18 @@ public class FormEmprestimo extends javax.swing.JFrame {
         catch (ParseException exception) {
             JOptionPane.showMessageDialog(null, "Data inválida! Digite-a no formato dd/MM/yyyy.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtData.requestFocus();
-            txtData.setBackground(vermelho);
+            // txtData.setBackground(vermelho);
             return;
         }
 
         // Adiciona um empréstimo
         Emprestimo emprestimo = new Emprestimo(id, idFuncionario, idUsuario, idLivro, data);
-        
+
         try {
-            daoEmprestimo.atualizar(emprestimo);
+            daoEmprestimo.incluir(emprestimo);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
-            return;
-        } catch (NoSuchElementException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Não foi possível atualizar o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao incluir o empréstimo! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -476,8 +458,10 @@ public class FormEmprestimo extends javax.swing.JFrame {
         txtIDUsuario.setText("");
 
         JOptionPane.showMessageDialog(null, "Empréstimo incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
-        
-    }//GEN-LAST:event_btnAtualizarActionPerformed
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+    }//GEN-LAST:event_txtIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,7 +497,7 @@ public class FormEmprestimo extends javax.swing.JFrame {
                 FormEmprestimo tela;
                 tela = new FormEmprestimo();    
                 tela.setLocationRelativeTo(null);
-                tela.setTitle("Emprestimo");
+                tela.setTitle("Empréstimo");
                 tela.setVisible(true);
 
             }

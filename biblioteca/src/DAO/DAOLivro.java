@@ -46,10 +46,10 @@ public class DAOLivro implements DAOInterface{
     public void atualizar(Object objeto) {
         
         if(objeto == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Livro nulo!");
     
         if(!(objeto instanceof Livro))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um livro!");
 
         Livro livroAtualizado = (Livro) objeto;
         Livro livro = (Livro) localizar(livroAtualizado.getId());
@@ -80,6 +80,4 @@ public class DAOLivro implements DAOInterface{
         listaObjeto.addAll(Dados.listaLivros);
         return listaObjeto;
     }
-
-
 }

@@ -1,15 +1,33 @@
 package Telas;
 
+import java.util.NoSuchElementException;
+
+import javax.swing.JOptionPane;
+
 import DAO.DAOUsuario;
 import Modelo.Usuario;
 
 public class FormUsuario extends javax.swing.JFrame {
 
+    int tipoFuncionario;
+
+    DAOUsuario daoUsuario = new DAOUsuario();
+
     /**
-     * Creates new form FormAutor
+     * Creates new form FormUsuario
      */
     public FormUsuario() {
         initComponents();
+    }
+
+    public FormUsuario(int tipoFuncionario) {
+        initComponents();
+    
+        if(tipoFuncionario == 2){
+            btnAdicionar.setEnabled(false);
+            btnRemover.setEnabled(false);
+            btnAtualizar.setEnabled(false);
+        }
     }
 
     /**
@@ -41,6 +59,7 @@ public class FormUsuario extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("ID:");
 
@@ -73,6 +92,11 @@ public class FormUsuario extends javax.swing.JFrame {
         jPanel2.add(btnRemover);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAtualizar);
 
         btnLocalizar.setText("Localizar");
@@ -121,7 +145,7 @@ public class FormUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -144,36 +168,259 @@ public class FormUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(55, 55, 55)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(110, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        
+        int id = 0,
+            registroAcademico = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Remove o usuario
+        Usuario usuario = new Usuario(id, nomeString, sobrenomeString, registroAcademico);
+        
+        try {
+            daoUsuario.remover(usuario);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtRegistroAcademico.setText("");
+        
+        JOptionPane.showMessageDialog(null, "Usuário removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String raString = txtRegistroAcademico.getText(); 
+        
+        int id = 0,
+            idRA = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
+        // txtRegistroAcademico.setBackground(nulo);
+        // txtRegistroAcademico.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do usuário não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtNome.requestFocus();
+            // txtNome.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            idRA = Integer.parseInt(raString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "R.A. inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtRegistroAcademico.requestFocus();
+            // txtRegistroAcademico.setBackground(vermelho);
+            return;
+        }
+
+        // Adiciona o usuario
+
+        Usuario usuario = new Usuario(id, nomeString, sobrenomeString, idRA);
+        
+        try {
+            daoUsuario.incluir(usuario);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtRegistroAcademico.setText("");
+
+        JOptionPane.showMessageDialog(null, "Usuário incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE); 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TOD add your handling code here:
+        
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
-        // TODO add your handling code here:
+        
+        String idString = txtID.getText();
+        
+        int id = 0;
+        
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+        
+        // Localiza o usuário
+        Usuario usuario;
+        
+        try {
+            usuario = (Usuario) daoUsuario.localizar(id);
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtRegistroAcademico.setText("");
+        
+        JOptionPane.showMessageDialog(null, "ID: " + usuario.getId() + "\nNome: " + usuario.getNome() + " " + usuario.getSobrenome() + "\nR.A.: " + usuario.getRegistroAcademico(), "usuario encontrado!", JOptionPane.PLAIN_MESSAGE);
+    
     }//GEN-LAST:event_btnLocalizarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String raString = txtRegistroAcademico.getText();
+        
+        int id = 0,
+            registroAcademico = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do usuario não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtNome.requestFocus();
+            // txtNome.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            registroAcademico = Integer.parseInt(raString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "R.A. inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtRegistroAcademico.requestFocus();
+            // txtRegistroAcademico.setBackground(vermelho);
+            return;
+        }
+
+        Usuario usuario = new Usuario(id, nomeString, sobrenomeString, registroAcademico);
+
+        try{
+            daoUsuario.atualizar(usuario);
+
+        }
+        catch (IllegalArgumentException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtRegistroAcademico.setText("");
+
+        JOptionPane.showMessageDialog(null, "Usuário atualizado!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -2,10 +2,8 @@ package Telas;
 
 import java.util.NoSuchElementException;
 
-import java.awt.*;
 import javax.swing.JOptionPane;
 import DAO.DAOAutor;
-import Dados.Dados;
 import Modelo.Autor;
 
 public class FormAutor extends javax.swing.JFrame {
@@ -46,7 +44,11 @@ public class FormAutor extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btnAdicionar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnLocalizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -56,35 +58,11 @@ public class FormAutor extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtBiografia = new javax.swing.JTextArea();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
-        btnAdicionar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
-        btnLocalizar = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 400));
-
-        jLabel1.setText("ID:");
-
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Nome:");
-
-        jLabel3.setText("Sobrenome:");
-
-        jLabel4.setText("Biografia:");
-
-        txtBiografia.setColumns(20);
-        txtBiografia.setRows(5);
-        jScrollPane1.setViewportView(txtBiografia);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -120,76 +98,73 @@ public class FormAutor extends javax.swing.JFrame {
         });
         jPanel2.add(btnLocalizar);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(182, 182, 182)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153))
-        );
+        jLabel1.setText("ID:");
+
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Nome:");
+
+        jLabel3.setText("Sobrenome:");
+
+        jLabel4.setText("Biografia:");
+
+        txtBiografia.setColumns(20);
+        txtBiografia.setRows(5);
+        jScrollPane1.setViewportView(txtBiografia);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,10 +178,10 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
+        // txtID.setBackground(nulo);
 
         // ID inválido
         try {
@@ -215,7 +190,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(vermelho);
+            // txtID.setBackground(vermelho);
             return;
         }
 
@@ -231,7 +206,7 @@ public class FormAutor extends javax.swing.JFrame {
             return;
         }
         catch(NoSuchElementException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -251,11 +226,11 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
-        txtNome.setBackground(nulo);
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
 
         // ID inválido
         try {
@@ -264,7 +239,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(vermelho);
+            // txtID.setBackground(vermelho);
             return;
         }
 
@@ -277,7 +252,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtNome.requestFocus();
-            txtNome.setBackground(vermelho);
+            // txtNome.setBackground(vermelho);
             return;
         }
 
@@ -289,7 +264,7 @@ public class FormAutor extends javax.swing.JFrame {
             daoAutor.incluir(autor);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -308,15 +283,12 @@ public class FormAutor extends javax.swing.JFrame {
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
 
         String idString = txtID.getText();
-        String nomeString = txtNome.getText();
-        String sobrenomeString = txtSobrenome.getText();
-        String biografiaString = txtBiografia.getText();
         
         int id = 0;
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
+        // txtID.setBackground(nulo);
 
         // ID inválido
         try {
@@ -325,7 +297,7 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(vermelho);
+            // txtID.setBackground(vermelho);
             return;
         }
         
@@ -336,7 +308,7 @@ public class FormAutor extends javax.swing.JFrame {
             autor = (Autor) daoAutor.localizar(id);
         }
         catch(NoSuchElementException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
         
@@ -356,11 +328,11 @@ public class FormAutor extends javax.swing.JFrame {
         String biografiaString = txtBiografia.getText();
         
         int id = 0;
-        Color vermelho = new Color(255, 0, 0, 40);
-        Color nulo = new Color(255, 255, 255, 255);
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
 
-        txtID.setBackground(nulo);
-        txtNome.setBackground(nulo);
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
 
         // ID inválido
         try {
@@ -369,23 +341,11 @@ public class FormAutor extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
-            txtID.setBackground(vermelho);
+            // txtID.setBackground(vermelho);
             return;
         }
 
         // Nome inválido
-        try {
-            if(nomeString.isEmpty()) {
-                throw new IllegalArgumentException("Nome inválido! O nome do autor não pode ser vazio.");
-            }
-        }
-        catch(IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
-            txtNome.requestFocus();
-            txtNome.setBackground(vermelho);
-            return;
-        }
-
         Autor autor = new Autor(id, nomeString, sobrenomeString, biografiaString);
 
         try{
@@ -400,6 +360,13 @@ public class FormAutor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtBiografia.setText("");
+
+        JOptionPane.showMessageDialog(null, "Autor atualizado!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
@@ -452,10 +419,8 @@ public class FormAutor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea txtBiografia;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNome;

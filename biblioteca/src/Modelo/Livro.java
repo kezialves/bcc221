@@ -2,7 +2,6 @@ package Modelo;
 
 import java.util.List;
 import java.util.ArrayList;
-import Dados.Dados;
 
 public class Livro {
     private int id;
@@ -101,7 +100,7 @@ public class Livro {
         }
 
         return getId() + " - " + getTitulo() + ":\n\t" + 
-                "Autores: " + stringAutores +
-                "\nCategorias: " + stringCategorias + "\n";
+                "Autor(es): " + stringAutores +
+                "\nCategoria(s): " + stringCategorias + "\n";
     }
 }

@@ -53,17 +53,17 @@ public class DAOUsuario implements DAOInterface {
             }
         }
 
-        throw new NoSuchElementException();
+        throw new NoSuchElementException("ID do usuário não encontrado!");
     }
 
     @Override
     public void atualizar(Object objeto) {
         
         if(objeto == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Usuário nulo!");
     
         if(!(objeto instanceof Usuario))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um usuário!");
 
         Usuario usuarioAtualizado = (Usuario) objeto;
         Usuario usuario = (Usuario) localizar(usuarioAtualizado.getId());

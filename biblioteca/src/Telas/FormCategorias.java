@@ -52,6 +52,7 @@ public class FormCategorias extends javax.swing.JFrame {
         btnLocalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("ID:");
 
@@ -156,17 +157,17 @@ public class FormCategorias extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
         );
 
         pack();
@@ -179,6 +180,11 @@ public class FormCategorias extends javax.swing.JFrame {
         
         int id = 0;
 
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -186,6 +192,7 @@ public class FormCategorias extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
         
@@ -196,7 +203,7 @@ public class FormCategorias extends javax.swing.JFrame {
             categoria = (Categoria) daoCategoria.localizar(id);
         }
         catch(NoSuchElementException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
         
@@ -214,6 +221,11 @@ public class FormCategorias extends javax.swing.JFrame {
         
         int id = 0;
 
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -221,10 +233,11 @@ public class FormCategorias extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
 
-        // Remove o autor
+        // Remove a categoria
 
         Categoria categoria = new Categoria(id, tituloString);
         
@@ -236,14 +249,14 @@ public class FormCategorias extends javax.swing.JFrame {
             return;
         }
         catch(NoSuchElementException exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage() + "Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
         txtID.setText("");
         txtTitulo.setText("");
         
-        JOptionPane.showMessageDialog(null, "Categoria removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Categoria removida!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
 
     }//GEN-LAST:event_btnRemoverActionPerformed
 
@@ -254,6 +267,12 @@ public class FormCategorias extends javax.swing.JFrame {
         
         int id = 0;
 
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+        // txtTitulo.setBackground(nulo);
+
         // ID inválido
         try {
             id = Integer.parseInt(idString);
@@ -261,6 +280,7 @@ public class FormCategorias extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
             return;
         }
 
@@ -273,6 +293,7 @@ public class FormCategorias extends javax.swing.JFrame {
         catch(IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtTitulo.requestFocus();
+            // txtTitulo.setBackground(vermelho);
             return;
         }
 
@@ -284,7 +305,7 @@ public class FormCategorias extends javax.swing.JFrame {
             daoCategoria.incluir(categoria);
         }
         catch(IllegalArgumentException exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao incluir a categoria! Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 
@@ -295,17 +316,21 @@ public class FormCategorias extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-
-
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TOD add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
         String idString = txtID.getText();
         String tituloString = txtTitulo.getText();
         
         int id = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
 
         try {
             id = Integer.parseInt(idString);
@@ -313,6 +338,19 @@ public class FormCategorias extends javax.swing.JFrame {
         catch(NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
             txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            if(tituloString.isEmpty()) {
+                throw new IllegalArgumentException("Título inválido! O título da categoria não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtTitulo.requestFocus();
+            // txtNome.setBackground(vermelho);
             return;
         }
 
@@ -329,10 +367,14 @@ public class FormCategorias extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
             return;
         }
+
+        txtID.setText("");
+        txtTitulo.setText("");
+
+        JOptionPane.showMessageDialog(null, "Categoria atualizada!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
     /**
@@ -369,7 +411,7 @@ public class FormCategorias extends javax.swing.JFrame {
                 FormCategorias tela;
                 tela = new FormCategorias();    
                 tela.setLocationRelativeTo(null);
-                tela.setTitle("Categorias");
+                tela.setTitle("Categoria");
                 tela.setVisible(true);
             }
         });

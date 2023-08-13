@@ -1,15 +1,36 @@
 package Telas;
 
+import java.util.NoSuchElementException;
+
+import javax.swing.JOptionPane;
+
 import DAO.DAOFuncionario;
 import Modelo.Funcionario;
 
 public class FormFuncionario extends javax.swing.JFrame {
+
+    DAOFuncionario daoFuncionario = new DAOFuncionario();
+
+    int tipoFuncionario;
 
     /**
      * Creates new form FormAutor
      */
     public FormFuncionario() {
         initComponents();
+    }
+
+    // 1 - usuario normal, 2 - funcionario, 3 - chefe
+    public FormFuncionario(int tipoUsuario) {
+        initComponents();
+
+        this.tipoFuncionario = tipoUsuario;
+
+        if(this.tipoFuncionario == 2 || this.tipoFuncionario == 1){
+            this.btnAdicionar.setEnabled(false);
+            this.btnRemover.setEnabled(false);
+            this.btnAtualizar.setEnabled(false);
+        }
     }
 
     /**
@@ -38,14 +59,9 @@ public class FormFuncionario extends javax.swing.JFrame {
         btnLocalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 400));
 
         jLabel1.setText("ID:");
-
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Nome:");
 
@@ -53,7 +69,7 @@ public class FormFuncionario extends javax.swing.JFrame {
 
         jLabel4.setText("Matrícula:");
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,9 +88,19 @@ public class FormFuncionario extends javax.swing.JFrame {
         jPanel3.add(btnRemover);
 
         btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnAtualizar);
 
         btnLocalizar.setText("Localizar");
+        btnLocalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocalizarActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnLocalizar);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -87,7 +113,7 @@ public class FormFuncionario extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -111,7 +137,7 @@ public class FormFuncionario extends javax.swing.JFrame {
                         .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtMatricula))))
@@ -120,7 +146,7 @@ public class FormFuncionario extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,13 +156,13 @@ public class FormFuncionario extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -144,32 +170,255 @@ public class FormFuncionario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(93, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(86, 86, 86))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TOD add your handling code here:
+       
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String matriculaString = txtMatricula.getText();
+        
+        int id = 0,
+            matricula = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do funcionário não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtNome.requestFocus();
+            // txtNome.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            matricula = Integer.parseInt(matriculaString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Matricula inválida! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtMatricula.requestFocus();
+            // txtMatricula.setBackground(vermelho);
+            return;
+        }
+
+        // Adiciona o funcionario
+
+        Funcionario funcionario = new Funcionario(id, nomeString, sobrenomeString, matricula);
+        
+        try {
+            daoFuncionario.incluir(funcionario);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtMatricula.setText("");
+
+        JOptionPane.showMessageDialog(null, "Funcionário incluído!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TOD add your handling code here:
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        
+        int id = 0,
+            matricula = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Remove o funcionário
+
+        Funcionario funcionario = new Funcionario(id, nomeString, sobrenomeString, matricula);
+        
+        try {
+            daoFuncionario.remover(funcionario);
+        }
+        catch(IllegalArgumentException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtMatricula.setText("");
+        
+        JOptionPane.showMessageDialog(null, "Funcionário removido!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TOD add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+        String idString = txtID.getText();
+        String nomeString = txtNome.getText();
+        String sobrenomeString = txtSobrenome.getText();
+        String matriculaString = txtMatricula.getText();
+
+        int id = 0,
+            matricula = 0;
+
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+        // txtNome.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+
+        // Nome inválido
+        try {
+            if(nomeString.isEmpty()) {
+                throw new IllegalArgumentException("Nome inválido! O nome do funcionario não pode ser vazio.");
+            }
+        }
+        catch(IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtNome.requestFocus();
+            // txtNome.setBackground(vermelho);
+            return;
+        }
+
+        try {
+            matricula = Integer.parseInt(matriculaString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Matricula inválida! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtMatricula.requestFocus();
+            // xtMatricula.setBackground(vermelho);
+            return;
+        }
+
+        Funcionario funcionario = new Funcionario(id, nomeString, sobrenomeString, matricula);
+
+        try{
+            daoFuncionario.atualizar(funcionario);
+
+        }
+        catch (IllegalArgumentException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        catch (NoSuchElementException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(), "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtMatricula.setText("");
+
+        JOptionPane.showMessageDialog(null, "Funcionário atualizado!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
+        
+        String idString = txtID.getText();
+        
+        int id = 0;
+        
+        // Color vermelho = new Color(255, 0, 0, 40);
+        // Color nulo = new Color(255, 255, 255, 255);
+
+        // txtID.setBackground(nulo);
+
+        // ID inválido
+        try {
+            id = Integer.parseInt(idString);
+        }
+        catch(NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID inválido! Utilize apenas números.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            txtID.requestFocus();
+            // txtID.setBackground(vermelho);
+            return;
+        }
+        
+        // Localiza o autor
+        Funcionario funcionario;
+        
+        try {
+            funcionario = (Funcionario) daoFuncionario.localizar(id);
+        }
+        catch(NoSuchElementException exception) {
+            JOptionPane.showMessageDialog(null, exception.getMessage() + " Tente novamente.", "Erro!", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        txtID.setText("");
+        txtNome.setText("");
+        txtSobrenome.setText("");
+        txtMatricula.setText("");
+        
+        JOptionPane.showMessageDialog(null, "ID: " + funcionario.getId() + "\nNome: " + funcionario.getNome() + " " + funcionario.getSobrenome() + "\nMatricula: " + funcionario.getMatricula(), "Encontrado!", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btnLocalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +454,7 @@ public class FormFuncionario extends javax.swing.JFrame {
                 FormFuncionario tela;
                 tela = new FormFuncionario();    
                 tela.setLocationRelativeTo(null);
-                tela.setTitle("Funcionario");
+                tela.setTitle("Funcionário");
                 tela.setVisible(true);
             }
         });

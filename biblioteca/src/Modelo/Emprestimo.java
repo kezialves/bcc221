@@ -90,6 +90,6 @@ public class Emprestimo {
 
     @Override
     public String toString(){
-        return getId() + "\n Func.:" + getIdFuncionario() + "\n Usuario.: " + getIdUsuario() + "\n Livro.: " + getILivro() + "\n Data.: " + getDataEmprestimo();
+        return getId() + "\nID Funcionário:" + getIdFuncionario() + "\nID Usuário: " + getIdUsuario() + "\nID Livro: " + getILivro() + "\n Data: " + getDataEmprestimo();
     }
 }

@@ -1,8 +1,9 @@
 package Modelo;
 
 public class Funcionario extends Pessoa {
-    private int matricula;
     
+    private int matricula;
+
     // Construtor de funcionário
     public Funcionario(int id, String nome, String sobrenome, int matricula) {
         super(id, nome, sobrenome);
@@ -41,6 +42,6 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString(){
-        return super.toString() + "\n MAT.: " + getMatricula();
+        return super.toString();
     }
 }

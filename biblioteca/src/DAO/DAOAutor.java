@@ -41,28 +41,17 @@ public class DAOAutor implements DAOInterface {
             }
         }
         
-        throw new NoSuchElementException("ID do Autor não encontrado!"); // se não achar
+        throw new NoSuchElementException("ID do autor não encontrado!"); // se não achar
     }
 
     @Override
     public void atualizar(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Autor nulo!");
     
         if(!(objeto instanceof Autor))
-            throw new IllegalArgumentException();
-
-        if(!Dados.listaAutores.isEmpty()){
-
-            for(Autor autor: Dados.listaAutores) {
-            
-                // Compara os ids da lista de autores com o passado por parâmetro
-                if(autor.equals(objeto)) {
-                    throw new IllegalArgumentException(); // retorna o index do id se achar
-                }
-            }
-        }
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é autor!");
 
         Autor autorAtualizado = (Autor) objeto;
         Autor autor = (Autor) localizar(autorAtualizado.getId());
@@ -84,7 +73,7 @@ public class DAOAutor implements DAOInterface {
         // Usa a função localizar pra saber se o autor está presente na lista
         // Remove se achar
         Dados.listaAutores.remove(localizar(autor.getId()));
-        System.out.println("Autor removido com sucesso!");
+
     }
 
     @Override

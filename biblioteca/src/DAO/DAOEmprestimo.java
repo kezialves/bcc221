@@ -48,10 +48,10 @@ public class DAOEmprestimo implements DAOInterface {
 	public void atualizar(Object objeto) {
         
 		if(objeto == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Empréstimo nulo!");
     
         if(!(objeto instanceof Emprestimo))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um empréstimo!");
 
         Emprestimo emprestimoAtualizado = (Emprestimo) objeto;
         Emprestimo emprestimo = (Emprestimo) localizar(emprestimoAtualizado.getId());

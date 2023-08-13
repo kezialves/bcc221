@@ -1,16 +1,15 @@
 package Modelo;
 
 public class Usuario extends Pessoa {
-    private int registroAcademico;
     
+    private int registroAcademico;
+
     // Construtor de usuário
     public Usuario(int id, String nome, String sobrenome, int registroAcademico) {
         super(id, nome, sobrenome);
         setRegistroAcademico(registroAcademico);
     }
-    
-    // Getter e setter do registro acadêmico
-    
+
     public int getRegistroAcademico() {
         return registroAcademico;
     }    
@@ -41,6 +40,6 @@ public class Usuario extends Pessoa {
 
     @Override
     public String toString(){
-        return super.toString() + " - RA: " + getRegistroAcademico();
+        return super.toString();
     }
 }

@@ -66,10 +66,10 @@ public class DAOFuncionario implements DAOInterface {
     public void remover(Object objeto) {
 
         if(objeto == null)
-            throw new IllegalArgumentException() ;
+            throw new IllegalArgumentException("Erro! Funcionário nulo!") ;
     
         if(!(objeto instanceof Funcionario))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Erro! Você está tentando adicionar um objeto que não é um funcionário!");
 
         Funcionario funcionario = (Funcionario) objeto;
         
